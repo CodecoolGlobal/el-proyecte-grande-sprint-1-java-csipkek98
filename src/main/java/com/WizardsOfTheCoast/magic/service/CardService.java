@@ -12,10 +12,10 @@ import java.util.Set;
 @Service
 public class CardService {
 
-    public List<String> cardPictures(String url){
-        ArrayList<String> imageUrls = new ArrayList<String>();
+    public List<String> cardPictures(String pageNumber){
+        ArrayList<String> imageUrls = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
-        Object cards = restTemplate.getForObject(url, Object.class);
+        Object cards = restTemplate.getForObject(CardEndpoints.CARD_PICTURES.getPath(), Object.class, pageNumber);
         String jsonInString = new Gson().toJson(cards);
         JSONObject mJSONObject = new JSONObject(jsonInString);
         JSONArray obj = mJSONObject.getJSONArray("cards");
