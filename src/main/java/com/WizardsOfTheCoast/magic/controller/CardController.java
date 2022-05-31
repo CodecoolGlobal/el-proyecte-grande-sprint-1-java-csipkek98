@@ -1,4 +1,4 @@
-package com.WizardsOfTheCoast.magic;
+package com.WizardsOfTheCoast.magic.controller;
 
 
 import com.google.gson.Gson;
