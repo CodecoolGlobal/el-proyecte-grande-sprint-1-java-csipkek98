@@ -19,7 +19,7 @@ public class CardController {
 
     @GetMapping(value = "/")
     public String getAllCardsTest(Model model){
-        model.addAttribute("cards",cardService.cardPictures("https://api.magicthegathering.io/v1/cards?pageSize=3"));
+        model.addAttribute("cards",cardService.cardPictures("3"));
         return "index";
     }
 
