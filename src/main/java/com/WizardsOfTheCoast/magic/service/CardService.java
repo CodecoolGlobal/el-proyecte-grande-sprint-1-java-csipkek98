@@ -21,14 +21,9 @@ public class CardService {
 
     public List<String> cardPictures(String pageNumber){
         ArrayList<String> imageUrls = new ArrayList<>();
-        JSONArray obj = converter.getJSONArray("cards",pageNumber);
+        JSONArray obj = converter.getJSONArray("data",pageNumber);
         for (int i = 0; i < obj.length(); i++) {
-            Set<String> asd = obj.getJSONObject(i).keySet();
-            if(asd.contains("imageUrl")){
-                System.out.println(obj.getJSONObject(i).getString("imageUrl"));
-                imageUrls.add(obj.getJSONObject(i).getString("imageUrl"));
-            }else
-                System.out.println("no image");
+            imageUrls.add(obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"));
         }
         return imageUrls;
     }
