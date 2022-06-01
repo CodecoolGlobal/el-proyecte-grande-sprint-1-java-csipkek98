@@ -1,10 +1,10 @@
 package com.WizardsOfTheCoast.magic.service;
 
-public enum CardEndpoints {
-    CARD_PICTURES("https://api.magicthegathering.io/v1/cards?pageSize={number}");
+public enum APIEndpoints {
+    SEARCH("https://api.scryfall.com/cards/search?q={parameters}");
 
     private String path;
-    CardEndpoints(String path){
+    APIEndpoints(String path){
         this.path = path;
     }
 
