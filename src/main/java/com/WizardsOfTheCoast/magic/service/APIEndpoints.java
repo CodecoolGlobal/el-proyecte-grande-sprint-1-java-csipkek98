@@ -1,7 +1,8 @@
 package com.WizardsOfTheCoast.magic.service;
 
 public enum APIEndpoints {
-    SEARCH("https://api.scryfall.com/cards/search?q={parameters}");
+    FILTER("https://api.scryfall.com/cards/search?q={rarity}={common}"),
+    SEARCH("https://api.scryfall.com/cards/search?q={name}");
 
     private String path;
     APIEndpoints(String path){

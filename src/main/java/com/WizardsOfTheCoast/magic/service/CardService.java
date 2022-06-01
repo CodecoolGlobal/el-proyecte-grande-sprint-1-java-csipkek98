@@ -20,16 +20,21 @@ public class CardService {
         this.converter = converter;
     }
 
-    public List<CardModel> cardPictures(String pageNumber){
+    public List<CardModel> cardPictures(List<String> parameters){
         ArrayList<CardModel> cardDetails = new ArrayList<>();
-        JSONArray obj = converter.getJSONArray("data",pageNumber);
+        JSONArray obj = converter.getJSONArray("data", parameters,APIEndpoints.FILTER);
         for (int i = 0; i < obj.length(); i++) {
-            CardModel card = new CardModel.CardBuilder(
-                    obj.getJSONObject(i).getString("name"),
-                    obj.getJSONObject(i).getString("id"),
-                    obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
-                    obj.getJSONObject(i).getJSONObject("prices").getString("eur")).build();
-            cardDetails.add(card);
+            Set<String> asd = obj.getJSONObject(i).getJSONObject("prices").keySet();
+            if(asd.contains("usd") || asd.contains("eur")){
+                CardModel card = new CardModel.CardBuilder(
+                        obj.getJSONObject(i).getString("name"),
+                        obj.getJSONObject(i).getString("id"),
+                        obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
+                        obj.getJSONObject(i).getJSONObject("prices").getString("usd")).build();
+                cardDetails.add(card);
+                System.out.println("There is price");
+            }else
+                System.out.println("no image");
         }
         return cardDetails;
     }

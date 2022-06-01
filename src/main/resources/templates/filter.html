@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:each="card: ${filteredCards}">
+
+  <th:block th:switch="${card != null}">
+    <div th:case="true">
+      <img th:src="${card.getImageUrl}">
+    </div>
+    <div th:case="false">
+      <p>No price</p>
+    </div>
+  </th:block>
+
+  <p th:text="${card.getName}" />
+</div>
+</body>
+</html>
