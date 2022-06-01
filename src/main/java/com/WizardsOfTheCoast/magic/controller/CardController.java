@@ -19,7 +19,7 @@ public class CardController {
 
     @GetMapping(value = "/")
     public String getAllCardsTest(Model model){
-        model.addAttribute("cards",cardService.cardPictures("3"));
+        model.addAttribute("cards",cardService.cardPictures("name=Pyroblast"));
         return "index";
     }
 
