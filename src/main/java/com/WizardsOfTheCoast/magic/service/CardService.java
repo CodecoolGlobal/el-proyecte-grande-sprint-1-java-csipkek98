@@ -1,5 +1,6 @@
 package com.WizardsOfTheCoast.magic.service;
 
+import com.WizardsOfTheCoast.magic.model.CardModel;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,13 +20,18 @@ public class CardService {
         this.converter = converter;
     }
 
-    public List<String> cardPictures(String pageNumber){
-        ArrayList<String> imageUrls = new ArrayList<>();
+    public List<CardModel> cardPictures(String pageNumber){
+        ArrayList<CardModel> cardDetails = new ArrayList<>();
         JSONArray obj = converter.getJSONArray("data",pageNumber);
         for (int i = 0; i < obj.length(); i++) {
-            imageUrls.add(obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"));
+            CardModel card = new CardModel.CardBuilder(
+                    obj.getJSONObject(i).getString("name"),
+                    obj.getJSONObject(i).getString("id"),
+                    obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
+                    obj.getJSONObject(i).getJSONObject("prices").getString("eur")).build();
+            cardDetails.add(card);
         }
-        return imageUrls;
+        return cardDetails;
     }
 
 }

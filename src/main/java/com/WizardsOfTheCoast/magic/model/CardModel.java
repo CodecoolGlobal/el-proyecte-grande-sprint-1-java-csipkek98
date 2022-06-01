@@ -1,9 +1,9 @@
-package com.WizardsOfTheCoast.magic.Model;
+package com.WizardsOfTheCoast.magic.model;
 
 public class CardModel {
 
     private final String name;
-    private final int id;
+    private final String id;
     private final String imageUrl;
     private float price;
     private final String description;
@@ -26,7 +26,7 @@ public class CardModel {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,18 +53,18 @@ public class CardModel {
     public static class CardBuilder {
 
         private final String name;
-        private final int id;
+        private final String id;
         private final String imageUrl;
         private float price;
         private String description;
         private String rarity;
         private String type;
 
-        public CardBuilder(String name, int id, String imageUrl, float price) {
+        public CardBuilder(String name, String id, String imageUrl, String price) {
             this.name = name;
             this.id = id;
             this.imageUrl = imageUrl;
-            this.price = price;
+            this.price = Float.parseFloat(price);
         }
 
         public CardBuilder description(String description){
