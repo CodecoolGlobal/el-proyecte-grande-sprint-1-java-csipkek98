@@ -17,6 +17,8 @@ public class CardService {
         this.converter = converter;
     }
 
+        //TODO
+        //Find out if the getCards method belong to this class or not
     public List<CardModel> getCards(List<String> parameters, APIEndpoints endpoint){
         int cardsOnPageNumber = 0;
         ArrayList<CardModel> cardDetails = new ArrayList<>();
