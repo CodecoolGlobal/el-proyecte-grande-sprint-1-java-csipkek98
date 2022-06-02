@@ -1,12 +1,9 @@
 package com.WizardsOfTheCoast.magic.service;
 
 import com.WizardsOfTheCoast.magic.model.CardModel;
-import com.google.gson.Gson;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +17,10 @@ public class CardService {
         this.converter = converter;
     }
 
-    public List<CardModel> cardPictures(List<String> parameters){
+    public List<CardModel> getCards(List<String> parameters, APIEndpoints endpoint){
+        int cardsOnPageNumber = 0;
         ArrayList<CardModel> cardDetails = new ArrayList<>();
-        JSONArray obj = converter.getJSONArray("data", parameters,APIEndpoints.FILTER);
+        JSONArray obj = converter.getJSONArray("data", parameters,endpoint);
         for (int i = 0; i < obj.length(); i++) {
             Set<String> asd = obj.getJSONObject(i).getJSONObject("prices").keySet();
             if(asd.contains("usd") || asd.contains("eur")){
@@ -33,9 +31,16 @@ public class CardService {
                         obj.getJSONObject(i).getJSONObject("prices").getString("usd")).build();
                 cardDetails.add(card);
                 System.out.println("There is price");
-            }else
+                cardsOnPageNumber++;
+
+            }else {
                 System.out.println("no image");
+            }
+            if(cardsOnPageNumber == 10){
+                break;
+            }
         }
+
         return cardDetails;
     }
 

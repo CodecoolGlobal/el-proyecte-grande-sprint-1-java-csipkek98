@@ -1,6 +1,7 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 
+import com.WizardsOfTheCoast.magic.service.APIEndpoints;
 import com.WizardsOfTheCoast.magic.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class CardController {
     public String getAllCardsTest(Model model, @PathVariable String name){
         List<String> parameters = new ArrayList<>();
         parameters.add(name);
-        model.addAttribute("cards",cardService.cardPictures(parameters));
+        model.addAttribute("cards",cardService.getCards(parameters, APIEndpoints.SEARCH));
         return "index";
     }
 

@@ -1,6 +1,6 @@
 package com.WizardsOfTheCoast.magic.controller;
 
-import com.WizardsOfTheCoast.magic.model.CardModel;
+import com.WizardsOfTheCoast.magic.service.APIEndpoints;
 import com.WizardsOfTheCoast.magic.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +25,7 @@ public class FilterController {
         List<String> parameters = new ArrayList<>();
         parameters.add(rarity);
         parameters.add(rarityType);
-        for (CardModel cardPicture : cardService.cardPictures(parameters)) {
-            System.out.println(cardPicture);
-        }
-        model.addAttribute("filteredCards",cardService.cardPictures(parameters));
+        model.addAttribute("filteredCards",cardService.getCards(parameters, APIEndpoints.FILTER));
         return "filter";
     }
 }

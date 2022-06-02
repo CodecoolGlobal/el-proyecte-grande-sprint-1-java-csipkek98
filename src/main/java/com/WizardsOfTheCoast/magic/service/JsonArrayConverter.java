@@ -14,18 +14,15 @@ public class JsonArrayConverter {
     public JSONArray getJSONArray(String endPointKey, List<String> parameters, APIEndpoints apiEndpoints){
         RestTemplate restTemplate = new RestTemplate();
         Object cardsObject = null;
-
         switch (apiEndpoints) {
             case FILTER -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0), parameters.get(1));
             case SEARCH -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0));
             default -> {
             }
-            // code block
         }
 
         String jsonInString = new Gson().toJson(cardsObject);
         JSONObject mJSONObject = new JSONObject(jsonInString);
-
         return mJSONObject.getJSONArray(endPointKey);
     }
 
