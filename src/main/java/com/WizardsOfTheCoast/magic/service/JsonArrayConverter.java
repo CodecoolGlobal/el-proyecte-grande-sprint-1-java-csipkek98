@@ -17,6 +17,7 @@ public class JsonArrayConverter {
         switch (apiEndpoints) {
             case FILTER -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0), parameters.get(1));
             case SEARCH -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0));
+            case RANDOM -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class);
             default -> {
             }
         }
@@ -24,6 +25,14 @@ public class JsonArrayConverter {
         String jsonInString = new Gson().toJson(cardsObject);
         JSONObject mJSONObject = new JSONObject(jsonInString);
         return mJSONObject.getJSONArray(endPointKey);
+    }
+
+    public JSONObject getJSONObject(APIEndpoints apiEndpoints ){
+        RestTemplate restTemplate = new RestTemplate();
+        Object cardsObject = null;
+        cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class);
+        String jsonInString = new Gson().toJson(cardsObject);
+        return new JSONObject(jsonInString);
     }
 
 }
