@@ -17,6 +17,7 @@ public class JsonArrayConverter {
         switch (apiEndpoints) {
             case FILTER -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0), parameters.get(1));
             case SEARCH -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0));
+            case RANDOM -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class);
             default -> {
             }
         }
