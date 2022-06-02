@@ -41,4 +41,8 @@ public class CardService {
         }
         return cardDetails;
     }
+
+    public CardModel getCard(APIEndpoints endpoint){
+
+    }
 }

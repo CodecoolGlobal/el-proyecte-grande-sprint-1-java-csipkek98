@@ -20,10 +20,10 @@ public class RandomCardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/randcomcard")
+    @GetMapping(value = "/randomcard")
     public String getRandomCard(Model model){
         List<String> parameters = new ArrayList<>();
         model.addAttribute("filteredCards",cardService.getCards(parameters, APIEndpoints.RANDOM));
-        return "carddetails";
+        return "cardDetails";
     }
 }
