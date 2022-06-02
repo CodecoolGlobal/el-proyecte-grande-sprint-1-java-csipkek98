@@ -22,26 +22,21 @@ public class CardService {
         ArrayList<CardModel> cardDetails = new ArrayList<>();
         JSONArray obj = converter.getJSONArray("data", parameters,endpoint);
         for (int i = 0; i < obj.length(); i++) {
-            Set<String> asd = obj.getJSONObject(i).getJSONObject("prices").keySet();
-            if(asd.contains("usd") || asd.contains("eur")){
+            Set<String> currencyKey = obj.getJSONObject(i).getJSONObject("prices").keySet();
+            if(currencyKey.contains("usd") || currencyKey.contains("eur")){
                 CardModel card = new CardModel.CardBuilder(
                         obj.getJSONObject(i).getString("name"),
                         obj.getJSONObject(i).getString("id"),
                         obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
                         obj.getJSONObject(i).getJSONObject("prices").getString("usd")).build();
                 cardDetails.add(card);
-                System.out.println("There is price");
                 cardsOnPageNumber++;
 
-            }else {
-                System.out.println("no image");
             }
             if(cardsOnPageNumber == 10){
                 break;
             }
         }
-
         return cardDetails;
     }
-
 }
