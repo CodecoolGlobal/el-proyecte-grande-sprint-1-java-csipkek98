@@ -30,10 +30,9 @@ public class JsonArrayConverter {
     public JSONObject getJSONObject(APIEndpoints apiEndpoints ){
         RestTemplate restTemplate = new RestTemplate();
         Object cardsObject = null;
-        cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class;
+        cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class);
         String jsonInString = new Gson().toJson(cardsObject);
-        JSONObject card = new JSONObject(jsonInString);
-        return card;
+        return new JSONObject(jsonInString);
     }
 
 }

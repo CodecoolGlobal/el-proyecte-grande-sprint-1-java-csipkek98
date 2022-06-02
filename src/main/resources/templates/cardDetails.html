@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="Magic Trades | ${card.getName}">Magic Trades | Card info</title>
+    <title th:text="${card.getName}">Magic Trades | Card info</title>
 </head>
 <body>
     <div>
-        <image th:source="${card.getImageUrl}"></image><br>
+        <img th:src="${card.getImageUrl}"><br>
         <div>Name: <p th:text="${card.getName}">UNKNOWN</p></div><br>
-        <div>Price: <p th:text="${card.getPrice*100} Point">UNKNOWN</p></div><br>
+        <div>Price: <p th:text="${card.getPrice}" >UNKNOWN</p></div><br>
     </div>
 </body>
 </html>

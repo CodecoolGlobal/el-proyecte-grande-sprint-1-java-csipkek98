@@ -2,6 +2,7 @@ package com.WizardsOfTheCoast.magic.service;
 
 import com.WizardsOfTheCoast.magic.model.CardModel;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,17 @@ public class CardService {
         return cardDetails;
     }
 
-    public CardModel getCard(APIEndpoints endpoint){
-
+    public CardModel getCard(APIEndpoints endpoint) {
+        JSONObject obj = converter.getJSONObject(endpoint);
+        Set<String> currencyKey = obj.getJSONObject("prices").keySet();
+        CardModel card = null;
+        if (currencyKey.contains("usd") || currencyKey.contains("eur")) {
+             card = new CardModel.CardBuilder(
+                    obj.getString("name"),
+                    obj.getString("id"),
+                    obj.getJSONObject("image_uris").getString("normal"),
+                    obj.getJSONObject("prices").getString("usd")).build();
+        }
+        return card;
     }
 }
