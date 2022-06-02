@@ -1,6 +1,5 @@
 package com.WizardsOfTheCoast.magic.controller;
 
-
 import com.WizardsOfTheCoast.magic.service.APIEndpoints;
 import com.WizardsOfTheCoast.magic.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class CardController {
-
+public class FilterController {
     private CardService cardService;
 
     @Autowired
@@ -22,12 +20,12 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/{name}")
-    public String getAllCardsTest(Model model, @PathVariable String name){
+    @GetMapping("/card/filter/{rarity}/{rarityType}")
+    public String getCardsByRarity(Model model, @PathVariable String rarity, @PathVariable String rarityType){
         List<String> parameters = new ArrayList<>();
-        parameters.add(name);
-        model.addAttribute("cards",cardService.getCards(parameters, APIEndpoints.SEARCH));
-        return "index";
+        parameters.add(rarity);
+        parameters.add(rarityType);
+        model.addAttribute("filteredCards",cardService.getCards(parameters, APIEndpoints.FILTER));
+        return "filter";
     }
-
 }

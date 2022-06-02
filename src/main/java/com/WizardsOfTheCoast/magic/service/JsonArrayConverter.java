@@ -5,15 +5,24 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
 @Component
 public class JsonArrayConverter {
 
-    public JSONArray getJSONArray(String endPointKey, String parameters){
+    public JSONArray getJSONArray(String endPointKey, List<String> parameters, APIEndpoints apiEndpoints){
         RestTemplate restTemplate = new RestTemplate();
-        Object cardsObject = restTemplate.getForObject(APIEndpoints.SEARCH.getPath(), Object.class, parameters);
+        Object cardsObject = null;
+        switch (apiEndpoints) {
+            case FILTER -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0), parameters.get(1));
+            case SEARCH -> cardsObject = restTemplate.getForObject(apiEndpoints.getPath(), Object.class, parameters.get(0));
+            default -> {
+            }
+        }
+
         String jsonInString = new Gson().toJson(cardsObject);
         JSONObject mJSONObject = new JSONObject(jsonInString);
-
         return mJSONObject.getJSONArray(endPointKey);
     }
 

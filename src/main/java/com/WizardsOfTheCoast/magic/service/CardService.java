@@ -1,12 +1,9 @@
 package com.WizardsOfTheCoast.magic.service;
 
 import com.WizardsOfTheCoast.magic.model.CardModel;
-import com.google.gson.Gson;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +17,26 @@ public class CardService {
         this.converter = converter;
     }
 
-    public List<CardModel> cardPictures(String pageNumber){
+    public List<CardModel> getCards(List<String> parameters, APIEndpoints endpoint){
+        int cardsOnPageNumber = 0;
         ArrayList<CardModel> cardDetails = new ArrayList<>();
-        JSONArray obj = converter.getJSONArray("data",pageNumber);
+        JSONArray obj = converter.getJSONArray("data", parameters,endpoint);
         for (int i = 0; i < obj.length(); i++) {
-            CardModel card = new CardModel.CardBuilder(
-                    obj.getJSONObject(i).getString("name"),
-                    obj.getJSONObject(i).getString("id"),
-                    obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
-                    obj.getJSONObject(i).getJSONObject("prices").getString("eur")).build();
-            cardDetails.add(card);
+            Set<String> currencyKey = obj.getJSONObject(i).getJSONObject("prices").keySet();
+            if(currencyKey.contains("usd") || currencyKey.contains("eur")){
+                CardModel card = new CardModel.CardBuilder(
+                        obj.getJSONObject(i).getString("name"),
+                        obj.getJSONObject(i).getString("id"),
+                        obj.getJSONObject(i).getJSONObject("image_uris").getString("normal"),
+                        obj.getJSONObject(i).getJSONObject("prices").getString("usd")).build();
+                cardDetails.add(card);
+                cardsOnPageNumber++;
+
+            }
+            if(cardsOnPageNumber == 10){
+                break;
+            }
         }
         return cardDetails;
     }
-
 }
