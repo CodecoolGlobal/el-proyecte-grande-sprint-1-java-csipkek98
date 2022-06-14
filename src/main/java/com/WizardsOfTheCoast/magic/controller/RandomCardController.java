@@ -26,6 +26,10 @@ public class RandomCardController {
     @GetMapping(value = "/randomcard")
     @CrossOrigin("*")
     public CardModel getRandomCard(){
-        return cardService.getCard(APIEndpoints.RANDOM);
+        CardModel cardData = cardService.getCard(APIEndpoints.RANDOM);
+        while(cardData == null){
+            cardData = cardService.getCard(APIEndpoints.RANDOM);
+        }
+        return cardData;
     }
 }
