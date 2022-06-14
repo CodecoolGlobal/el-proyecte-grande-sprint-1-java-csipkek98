@@ -18,7 +18,6 @@ const RandomCards = () => {
     },[]);
     return (
         <div>
-            {/* 👇️ iterate object VALUES */}
             {Object.values(cardData).map((value, index) => {
                 if(index=== 2){
                     return (
