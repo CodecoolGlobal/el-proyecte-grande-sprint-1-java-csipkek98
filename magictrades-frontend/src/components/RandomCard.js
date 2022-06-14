@@ -2,10 +2,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
+
+
 const RandomCards = () => {
+    const url = `${process.env.REACT_APP_HOST_URL}/randomcard`;
     const [cardData, setCardData] = useState([]);
     const fetchCards = () => {
-        axios.get('http://localhost:8080/randomcard').then((response) => {
+        axios.get(url).then((response) => {
             console.log(response);
             const data = response.data;
             setCardData(data);
