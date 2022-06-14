@@ -24,7 +24,7 @@ public class RandomCardController {
     }
 
     @GetMapping(value = "/randomcard")
-    @CrossOrigin("*")
+    @CrossOrigin("https://magictrade.azurewebsites.net/randomcard")
     public CardModel getRandomCard(){
         return cardService.getCard(APIEndpoints.RANDOM);
     }
