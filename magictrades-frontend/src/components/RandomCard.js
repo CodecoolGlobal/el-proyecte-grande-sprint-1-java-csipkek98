@@ -2,8 +2,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-
-
 const RandomCards = () => {
     const url = `${process.env.REACT_APP_HOST_URL}/randomcard`;
     const [cardData, setCardData] = useState([]);
