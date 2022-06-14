@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@CrossOrigin(origins = "*",
+
+@CrossOrigin(origins = {"http://localhost:3000","https://magictrade.azurewebsites.net"},
         methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
         , allowedHeaders = "*")
+@RestController
 public class RandomCardController {
 
     private CardService cardService;
