@@ -1,10 +1,5 @@
-
-import logo from './logo.svg';
 import './App.css';
-import React, {useState, useEffect} from 'react';
-import RandomCard from "./components/RandomCard";
-import Home from "./components/Home";
-import {BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 
 function App() {
@@ -15,14 +10,8 @@ function App() {
 
   return (
         <div>
-        <button onClick={navigateToRandom}>RandomCard</button>
-        <hr />
-        <Routes>
-          <Route path="/random" element={<RandomCard/>} />
-        </Routes>
         </div>
-
   );
 }
 
-export default App;
+export default App
