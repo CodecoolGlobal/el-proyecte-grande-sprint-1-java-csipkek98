@@ -9,7 +9,7 @@ const Navbar = () => {
     return (
             <div>
                 <ul id={"navbar"}>
-                    <li><Link to="/random">Random</Link></li>
+                    <li id={"button-random"}><Link to="/random">Random</Link></li>
                     <li><Link to="#news">News</Link></li>
                     <li><Link to="#contact">Contact</Link></li>
                     <li><Link className="active" to="#about">About</Link></li>
