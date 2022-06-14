@@ -22,7 +22,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/{name}")
+    @GetMapping(value = "/search/{name}")
     public String getAllCardsTest(Model model, @PathVariable String name){
         List<String> parameters = new ArrayList<>();
         parameters.add(name);

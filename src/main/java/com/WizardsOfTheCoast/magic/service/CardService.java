@@ -54,6 +54,7 @@ public class CardService {
                     obj.getJSONObject("image_uris").getString("normal"),
                     obj.getJSONObject("prices").getString("usd")).build();
         }
+
         return card;
     }
 }
