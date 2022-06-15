@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CustomCardDAO {
 
-    void addCustomCard();
+    void addCustomCard(CardModel customCard );
     List<CardModel> getAllCustomCard();
 }
