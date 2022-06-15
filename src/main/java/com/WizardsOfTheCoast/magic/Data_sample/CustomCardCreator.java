@@ -11,8 +11,8 @@ public class CustomCardCreator {
 
     public static List<CardModel> initialize() {
         List<CardModel> cards = new ArrayList<>();
-        CardModel card = new CardModel.CardBuilder("Test card", "Test id1", "Test url", "1").build();
-        CardModel card2 = new CardModel.CardBuilder("Test card3", "Test id2", "Test url", "2").build();
+        CardModel card = new CardModel.CardBuilder("Mr.T the Humble", "Test id1", "https://i.im.ge/2022/06/16/rJGMJY.jpg" ,"1000").build();
+        CardModel card2 = new CardModel.CardBuilder("Bob the Almighty", "Test id2", "https://i.im.ge/2022/06/16/rJGdnr.jpg", "2000").build();
         cards.add(card2);
         cards.add(card);
         return cards;
