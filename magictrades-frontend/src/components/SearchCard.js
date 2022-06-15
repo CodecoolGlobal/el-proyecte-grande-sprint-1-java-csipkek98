@@ -18,12 +18,12 @@ const SearchCard = () => {
     },[]);
             return (
                 <div>
-                    <input type="text" id="message" name="name"
+                    <input className="searchField" type="text" id="message" name="name"
                         value={inputName}
                         onChange={(event) => setName(event.target.value)}
                         autoComplete="off"
                     />
-                    <button id={"button-searchStart"} onClick={fetchCards}>Search Card</button>
+                    <button className="searchButton" onClick={fetchCards}>Search</button>
                     <div>
                         <SearchResult data={getCards}/>
                 </div>
