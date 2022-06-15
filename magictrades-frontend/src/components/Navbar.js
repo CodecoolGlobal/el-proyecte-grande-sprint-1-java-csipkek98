@@ -1,6 +1,7 @@
 import {Route, Routes, useNavigate, Link} from "react-router-dom";
 import RandomCard from "./RandomCard";
 import Home from "./Home";
+import SearchCard from "./SearchCard";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Navbar = () => {
                     <Routes>
                         <Route path="/" element={<Home/>} />
                         <Route path="/random" element={<RandomCard/>} />
-                        <Route path="/search" element={<RandomCard/>} />
+                        <Route path="/search" element={<SearchCard/>} />
                     </Routes>
                 </div>
             </div>
