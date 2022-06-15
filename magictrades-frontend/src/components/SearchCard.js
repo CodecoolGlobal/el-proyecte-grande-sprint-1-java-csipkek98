@@ -17,13 +17,13 @@ const SearchCard = () => {
         fetchCards().then(r => console.log('i fire once'));
     },[]);
             return (
-                <div>
-                    <input type="text" id="message" name="name"
+                <div className="searchContainer">
+                    <input className = "searchField" type="text" id="message" name="name"
                         value={inputName}
                         onChange={(event) => setName(event.target.value)}
                         autoComplete="off"
                     />
-                    <button id={"button-searchStart"} onClick={fetchCards}>Search Card</button>
+                    <button id={"button-searchStart"} onClick={fetchCards} className="searchButton">Search Card</button>
                     <div>
                         <SearchResult data={getCards}/>
                 </div>
