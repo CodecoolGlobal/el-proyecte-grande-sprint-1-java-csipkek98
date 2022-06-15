@@ -1,16 +1,14 @@
+
 import './App.css';
-import {useNavigate} from 'react-router-dom'
-
-
+import './App.css';
+import React, {useState, useEffect} from 'react';
+import SearchCard from "./components/SearchCard";
 function App() {
-  const navigate = useNavigate();
-  const navigateToRandom = () => {
-    navigate('/random');
-  };
-
   return (
         <div>
+            <SearchCard/>
         </div>
+
   );
 }
 
