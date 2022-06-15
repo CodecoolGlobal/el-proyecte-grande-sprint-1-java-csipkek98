@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import SearchResult from "./SearchResult";
 
 const SearchCard = () => {
     const [inputName, setName] = useState(null);
@@ -40,14 +41,7 @@ const SearchCard = () => {
                         <input name={"rarity"} type={"radio"} value={"rare"} onChange={(event) => setRarity(event.target.value)}/><label>Rare</label>
                     </form>
                     <div>
-                        {
-                            getCards.map(cardObj => (
-                                <div key={cardObj.id}>
-                                    <h1>{cardObj.name}</h1>
-                                    <img src={cardObj.imageUrl} alt="new"/>
-                                </div>
-                                )
-                            )}
+                        <SearchResult data={getCards}/>
                 </div>
                 </div>
             );

@@ -14,6 +14,8 @@ const Navbar = () => {
                     <li id={"button-home"}><Link to="/">Home</Link></li>
                     <li id={"button-random"}><Link to="/random">Random</Link></li>
                     <li id={"button-search"}><Link to="/search">Search</Link></li>
+
+                    <li><Link to="#news">News</Link></li>
                     <li><Link className="active" to="#about">About</Link></li>
                 </ul>
                 <div>
