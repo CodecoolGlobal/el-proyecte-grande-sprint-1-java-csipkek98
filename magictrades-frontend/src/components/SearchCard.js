@@ -22,7 +22,7 @@ const SearchCard = () => {
                         onChange={(event) => setName(event.target.value)}
                         autoComplete="off"
                     />
-                    <button onClick={fetchCards}>Search</button>
+                    <button id={"button-searchStart"} onClick={fetchCards}>Search Card</button>
                     <div>
                         {
                             getCards.map(cardObj => (
