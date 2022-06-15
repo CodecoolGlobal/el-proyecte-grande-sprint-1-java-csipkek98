@@ -21,11 +21,11 @@ public class customCardService {
         this.customCardDao = customCardDao;
     }
 
-    public List<CardModel> getRooms(){
+    public List<CardModel> getAllCustomCard(){
         return customCardDao.getAllCustomCard();
     }
 
-    public void saveRoom(CardModel customCard){
+    public void addCard(CardModel customCard){
         customCardDao.addCustomCard(customCard);
     }
 
