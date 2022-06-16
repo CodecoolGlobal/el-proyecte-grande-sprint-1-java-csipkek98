@@ -40,6 +40,7 @@ const SearchCard = () => {
                         <input name={"rarity"} type={"radio"} value={"common"} onChange={(event) => setRarity(event.target.value)}/><label>Common</label><br/>
                         <input name={"rarity"} type={"radio"} value={"rare"} onChange={(event) => setRarity(event.target.value)}/><label>Rare</label>
                     </form>
+                    <button className="searchButton" onClick={fetchCards}>Search</button>
                     <div>
                         <SearchResult data={getCards}/>
                 </div>
