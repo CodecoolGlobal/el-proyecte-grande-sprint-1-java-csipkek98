@@ -6,6 +6,7 @@ import SearchResult from "./SearchResult";
 const CustomCard = () => {
     const [inputName, setName] = useState("");
     const [inputPrice, setPrice] = useState("");
+    const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
     const url = "http://localhost:8080/custom";
     const fetchCards = async () => {
@@ -19,6 +20,14 @@ const CustomCard = () => {
     useEffect(() => {
         fetchCards().then(r => console.log('i fire once'));
     },[]);
+    const postData = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:8080/custom",{
+            name: inputName,
+            price: inputPrice, pic: inputPic
+        }
+            ).then(r => console.log(r)).catch(e => console.log(e))
+    }
 
     return (
         <div>
@@ -34,7 +43,13 @@ const CustomCard = () => {
                    onChange={(event) => setPrice(event.target.value)}
                    autoComplete="off"
             />
-            <button className="searchButton" onClick={fetchCards}>Add custom card ! </button>
+            <label>Pic</label>
+            <input className="searchField" type="text" id="inputPrice" name="pic"
+                   value={inputPic}
+                   onChange={(event) => setPic(event.target.value)}
+                   autoComplete="off"
+            />
+            <button className="searchButton" onClick={postData}>Add custom card ! </button>
             <br/>
             <br/>
             <br/>
