@@ -8,7 +8,7 @@ const CustomCard = () => {
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
-    const url = "http://localhost:8080/custom";
+    const url = `${process.env.REACT_APP_HOST_URL}/custom`;
     const fetchCards = async () => {
         await axios.get(url
         ).then((response) => {
@@ -22,7 +22,7 @@ const CustomCard = () => {
     },[]);
     const postData = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/custom",{
+        axios.post(url,{
             name: inputName,
             price: inputPrice, pic: inputPic
         }
