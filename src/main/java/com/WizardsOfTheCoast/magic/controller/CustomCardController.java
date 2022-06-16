@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 @CrossOrigin(origins = {"http://localhost:3000","https://lemon-stone-05afd8203.1.azurestaticapps.net", "http://localhost:4200"},
@@ -31,17 +33,23 @@ public class CustomCardController {
         }
     }
 
-    @PostMapping
-    public void createClient(@RequestBody CardModel customCard) throws URISyntaxException {
-        cardService.addCard(customCard);
-    }
-
     @GetMapping(value = "/custom")
     public List<CardModel> getClients() {
         if (cardService.getAllCustomCard().size() < 2) {
             initCards();
         }
         return cardService.getAllCustomCard();
+    }
+
+    @PostMapping(value = "/custom")
+    public CardModel addCustomCard(@RequestBody Map<String, Object> payLoad) {
+        UUID customId = UUID.randomUUID();
+        CardModel customCard = new CardModel.CardBuilder(
+                (String)payLoad.get("name"), customId.toString(),
+                (String)payLoad.get("image"),(String)payLoad.get("price")
+        ).build();
+        cardService.addCard(customCard);
+        return customCard;
     }
 
     public void initCards(){
