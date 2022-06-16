@@ -23,7 +23,7 @@ public class CardController {
     @GetMapping(value = "/search{name}")
     public List<CardModel> getAllCardsTest(@PathVariable (required = false) String name){
         List<String> parameters = new ArrayList<>();
-        parameters.add(name);
+        parameters.add("name="+name);
         return cardService.getCards(parameters, APIEndpoints.SEARCH);
     }
 

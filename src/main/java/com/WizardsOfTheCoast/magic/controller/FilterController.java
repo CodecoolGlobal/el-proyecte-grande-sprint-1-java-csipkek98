@@ -1,17 +1,21 @@
 package com.WizardsOfTheCoast.magic.controller;
 
+import com.WizardsOfTheCoast.magic.model.CardModel;
 import com.WizardsOfTheCoast.magic.service.APIEndpoints;
 import com.WizardsOfTheCoast.magic.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@CrossOrigin(origins = {"http://localhost:3000","https://lemon-stone-05afd8203.1.azurestaticapps.net"},
+        methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
+        , allowedHeaders = "*")
+@RestController
 public class FilterController {
     private CardService cardService;
 
@@ -20,12 +24,17 @@ public class FilterController {
         this.cardService = cardService;
     }
 
-    @GetMapping("/card/filter/{rarity}/{rarityType}")
-    public String getCardsByRarity(Model model, @PathVariable String rarity, @PathVariable String rarityType){
-        List<String> parameters = new ArrayList<>();
-        parameters.add(rarity);
-        parameters.add(rarityType);
-        model.addAttribute("filteredCards",cardService.getCards(parameters, APIEndpoints.FILTER));
-        return "filter";
+    @GetMapping("/card/filter")
+    public List<CardModel> getCardsByFilters(HttpServletRequest request, Model model) {
+        String query = request.getQueryString();
+        System.out.println(query);
+        String[] parameters = query.split("[&=]");
+        List<String> parameterData = new ArrayList<>();
+        for (int i = 0; i < parameters.length; i = i + 2) {
+            System.out.println(parameters[i] + " " + parameters[i + 1]);
+            parameterData.add(parameters[i] + "=" + parameters[i + 1]);
+        }
+        System.out.println(parameterData);
+        return cardService.getCards(parameterData, APIEndpoints.SEARCH);
     }
 }

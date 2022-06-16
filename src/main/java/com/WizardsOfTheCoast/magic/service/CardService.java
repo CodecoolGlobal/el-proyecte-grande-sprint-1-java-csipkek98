@@ -22,9 +22,13 @@ public class CardService {
         //TODO
         //Find out if the getCards method belong to this class or not
     public List<CardModel> getCards(List<String> parameters, APIEndpoints endpoint){
+        String parameterString = String.join("+",parameters);
+        List<String> param = new ArrayList<>();
+        param.add(parameterString);
+
         int cardsOnPageNumber = 0;
         ArrayList<CardModel> cardDetails = new ArrayList<>();
-        JSONArray obj = converter.getJSONArray("data", parameters,endpoint);
+        JSONArray obj = converter.getJSONArray("data", param,endpoint);
         for (int i = 0; i < obj.length(); i++) {
             Set<String> currencyKey = obj.getJSONObject(i).getJSONObject("prices").keySet();
             if(currencyKey.contains("usd") || currencyKey.contains("eur")){
