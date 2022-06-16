@@ -30,17 +30,16 @@ const SearchCard = () => {
             return (
                 <div>
                     <form onSubmit={handleSubmit}>
-                    <input type="text" id="message" name="name"
+                    <input className="searchField" type="text" id="message" name="name"
                         value={inputName}
                         onChange={(event) => setName(event.target.value)}
                         autoComplete="off"
                     />
-                    <button type={"submit"} id={"button-searchStart"}>Search Card</button><br/>
+                    <button className="searchButton" type={"submit"} id={"button-searchStart"}>Search Card</button><br/>
                         <label>Rarity type:</label><br/>
                         <input name={"rarity"} type={"radio"} value={"common"} onChange={(event) => setRarity(event.target.value)}/><label>Common</label><br/>
                         <input name={"rarity"} type={"radio"} value={"rare"} onChange={(event) => setRarity(event.target.value)}/><label>Rare</label>
                     </form>
-                    <button className="searchButton" onClick={fetchCards}>Search</button>
                     <div>
                         <SearchResult data={getCards}/>
                 </div>
