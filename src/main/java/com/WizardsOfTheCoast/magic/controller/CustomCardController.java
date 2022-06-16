@@ -46,7 +46,7 @@ public class CustomCardController {
         UUID customId = UUID.randomUUID();
         CardModel customCard = new CardModel.CardBuilder(
                 (String)payLoad.get("name"), customId.toString(),
-                (String)payLoad.get("image"),(String)payLoad.get("price")
+                (String)payLoad.get("pic"),(String)payLoad.get("price")
         ).build();
         cardService.addCard(customCard);
         return customCard;
