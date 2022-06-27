@@ -1,6 +1,7 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.Data_sample.CustomCardCreator;
+import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import com.WizardsOfTheCoast.magic.model.CardModel;
 import com.WizardsOfTheCoast.magic.service.CardService;
 import com.WizardsOfTheCoast.magic.service.customCardService;
@@ -28,13 +29,13 @@ public class CustomCardController {
     @GetMapping(value = "/")
     public void Greetings(){
         initCards();
-        for(CardModel card: cardService.getAllCustomCard()){
+        for(CustomCardEntity card: cardService.getAllCustomCard()){
             System.out.println(card.getName());
         }
     }
 
     @GetMapping(value = "/custom")
-    public List<CardModel> getClients() {
+    public List<CustomCardEntity> getClients() {
         if (cardService.getAllCustomCard().size() < 2) {
             initCards();
         }
@@ -42,19 +43,19 @@ public class CustomCardController {
     }
 
     @PostMapping(value = "/custom")
-    public CardModel addCustomCard(@RequestBody Map<String, Object> payLoad) {
-        UUID customId = UUID.randomUUID();
-        CardModel customCard = new CardModel.CardBuilder(
-                (String)payLoad.get("name"), customId.toString(),
-                (String)payLoad.get("pic"),(String)payLoad.get("price")
-        ).build();
+    public CustomCardEntity addCustomCard(@RequestBody Map<String, Object> payLoad) {
+        CustomCardEntity customCard = CustomCardEntity.builder()
+                .name((String)payLoad.get("name"))
+                .imageUrl((String)payLoad.get("pic"))
+                .price(Integer.parseInt((String)payLoad.get("price")))
+        .build();
         cardService.addCard(customCard);
         return customCard;
     }
 
     public void initCards(){
-        List<CardModel> initCards = CustomCardCreator.initialize();
-        for (CardModel initCard : initCards) {
+        List<CustomCardEntity> initCards = CustomCardCreator.initialize();
+        for (CustomCardEntity initCard : initCards) {
             cardService.addCard(initCard);
         }
     }
