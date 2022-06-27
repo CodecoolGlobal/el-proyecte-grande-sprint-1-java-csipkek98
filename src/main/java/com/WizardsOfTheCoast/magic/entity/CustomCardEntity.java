@@ -1,9 +1,6 @@
 package com.WizardsOfTheCoast.magic.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -29,5 +26,23 @@ public class CustomCardEntity {
             nullable = false
     )
     private Long id;
+    @Column(
+            name = "name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private  String name;
+    @Column(
+            name = "imageUrl",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private  String imageUrl;
+    @Column(
+            name = "price",
+            nullable = false,
+            columnDefinition = "integer"
+    )
+    private int price;
 
 }
