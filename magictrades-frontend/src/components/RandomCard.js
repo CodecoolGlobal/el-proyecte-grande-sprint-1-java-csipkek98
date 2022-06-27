@@ -2,20 +2,33 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
+const url = `${process.env.REACT_APP_HOST_URL}/randomcard`;
+const fetchCards = (abortController) => {
+    return axios.get(url, {signal: abortController.signal})
+}
+
 const RandomCards = () => {
     const [cardData, setCardData] = useState([]);
-    const url = `${process.env.REACT_APP_HOST_URL}/randomcard`;
-    const fetchCards = async () => {
-        await axios.get(url).then((response) => {
+
+    useEffect(() => {
+
+        const controller = new AbortController();
+        fetchCards(controller).then((response) => {
             console.log(response);
             const data = response.data;
             setCardData(data);
+        }).catch((e) =>{
+            console.log(e);
         });
-    }
-    useEffect(() => {
-        fetchCards().then(r => console.log('i fire once'));
+        return () => {
+            controller.abort();
+        }
     },[]);
     return (
+
+        // Create new component inside the map
+        // Mapping can be replaced, card component
+
         <div id={"card-details"}>
             {Object.keys(cardData).map((key, index) => {
                 if(cardData[key] !== null){

@@ -3,6 +3,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchResult from "./SearchResult";
 
+// useCallBack, useMemo, useContext
+// hackernews - pet project
+// suspense component
+
+
 const CustomCard = () => {
     const [inputName, setName] = useState("");
     const [inputPrice, setPrice] = useState("");
