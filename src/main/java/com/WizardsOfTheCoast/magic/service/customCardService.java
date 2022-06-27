@@ -1,32 +1,33 @@
 package com.WizardsOfTheCoast.magic.service;
 
-import com.WizardsOfTheCoast.magic.DAO.CustomCardDAO;
-import com.WizardsOfTheCoast.magic.model.CardModel;
+import com.WizardsOfTheCoast.magic.JPA.CustomCardRepository;
+import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class customCardService {
 
-    private final CustomCardDAO customCardDao;
+    private final CustomCardRepository customCardRepository;
 
 
     @Autowired
-    public customCardService(@Qualifier("customCardDao") CustomCardDAO customCardDao)
+    public customCardService(@Qualifier("CustomCardRepository")  CustomCardRepository customCardRepository)
     {
-        this.customCardDao = customCardDao;
+        this.customCardRepository = customCardRepository;
+
     }
 
-    public List<CardModel> getAllCustomCard(){
-        return customCardDao.getAllCustomCard();
+    public List<CustomCardEntity> getAllCustomCard(){
+        return customCardRepository.findAll();
     }
 
-    public void addCard(CardModel customCard){
-        customCardDao.addCustomCard(customCard);
+    public void addCard(CustomCardEntity customCardEntity){
+
+        customCardRepository.save(customCardEntity);
     }
 
 }
