@@ -53,6 +53,12 @@ public class CustomCardController {
         return customCard;
     }
 
+    @DeleteMapping(value = "/custom/{id}")
+    public void deleteCustomCard(@PathVariable String id){
+        cardService.deleteCustomCardById(Long.parseLong(id));
+    }
+
+
     public void initCards(){
         List<CustomCardEntity> initCards = CustomCardCreator.initialize();
         for (CustomCardEntity initCard : initCards) {

@@ -15,8 +15,8 @@ const CustomCard = () => {
     const handleClick = event => {
         setIsShown(current => !current);
     };
-    const fetchCards = async () => {
-        await axios.get(url
+    const fetchCards =  () => {
+         axios.get(url
         ).then((response) => {
             console.log(response);
             const data = response.data;
@@ -24,16 +24,29 @@ const CustomCard = () => {
         });
     }
     useEffect(() => {
-        fetchCards().then(r => console.log('i fire once'));
+        fetchCards()
     },[]);
     const postData = (e) => {
         e.preventDefault();
         axios.post(url,{
             name: inputName,
             price: inputPrice, pic: inputPic
-        }
-            ).then(r => console.log(r)).catch(e => console.log(e))
+        })
+            .then((res) => {
+                setCustomCardData([...getCustomCards, res.data])
+            });
     }
+    const removeUser = async id => {
+        try {
+            const res = await axios.delete(`${url}/${id}`)
+            await fetchCards()
+        } catch (error) {
+            alert(error)
+        }
+    }
+    useEffect(() => {
+         fetchCards()
+    }, [])
 
     return (
         <div>
@@ -61,7 +74,20 @@ const CustomCard = () => {
             <br/>
             <div>
                 <button className="searchButton" onClick={handleClick}>Show all custom card</button>
-                {isShown && <SearchResult data={getCustomCards} />}
+                {isShown && <div>
+                    {
+                        getCustomCards.map(cardObj => (
+                                <div key={cardObj.id}>
+                                    <h1>{cardObj.name}</h1>
+                                    <div className="container">
+                                        <p className="cardPrice">Price of the card:  {cardObj.price}</p>
+                                        < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
+                                        <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                    </div>
+                                </div>
+                            )
+                        )}
+                </div>}
             </div>
         </div>
     );

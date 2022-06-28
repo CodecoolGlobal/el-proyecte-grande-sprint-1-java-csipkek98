@@ -25,7 +25,7 @@ public class CustomCardEntity {
             updatable = false,
             nullable = false
     )
-    private Long id;
+    private long id;
     @Column(
             name = "name",
             nullable = false,
