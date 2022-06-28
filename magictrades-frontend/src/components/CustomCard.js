@@ -4,16 +4,17 @@ import axios from "axios";
 import SearchResult from "./SearchResult";
 
 // useCallBack, useMemo, useContext
-// hackernews - pet project
-// suspense component
-
 
 const CustomCard = () => {
     const [inputName, setName] = useState("");
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
-    const url = `${process.env.REACT_APP_HOST_URL}/custom`;
+    const url = `http://localhost:8080/custom`;
+    const [isShown, setIsShown] = useState(false);
+    const handleClick = event => {
+        setIsShown(current => !current);
+    };
     const fetchCards = async () => {
         await axios.get(url
         ).then((response) => {
@@ -58,7 +59,10 @@ const CustomCard = () => {
             <br/>
             <br/>
             <br/>
-            <SearchResult data={getCustomCards}/>
+            <div>
+                <button className="searchButton" onClick={handleClick}>Show all custom card</button>
+                {isShown && <SearchResult data={getCustomCards} />}
+            </div>
         </div>
     );
 };
