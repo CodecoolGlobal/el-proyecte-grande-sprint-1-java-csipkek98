@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class customCardService {
@@ -26,8 +27,12 @@ public class customCardService {
     }
 
     public void addCard(CustomCardEntity customCardEntity){
-
         customCardRepository.save(customCardEntity);
+    }
+
+    public void deleteCustomCardById(long customId){
+        CustomCardEntity customCardEntity = customCardRepository.findById(customId).get();
+        customCardRepository.delete(customCardEntity);
     }
 
 }
