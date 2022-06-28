@@ -18,7 +18,7 @@ public class MagicApplication {
 		Map<String, String> env = System.getenv();
 		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
 		dataSourceBuilder.driverClassName("org.postgresql.Driver");
-		dataSourceBuilder.url("jdbc:postgresql://localhost:5432/magic");
+		dataSourceBuilder.url("jdbc:postgresql://localhost:5432/hogwarts");
        	dataSourceBuilder.username(dotenv.get("DB_USERNAME"));
 	   	dataSourceBuilder.password(dotenv.get("DB_PASSWORD"));
 		return dataSourceBuilder.build();

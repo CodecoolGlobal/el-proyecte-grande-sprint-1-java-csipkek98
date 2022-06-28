@@ -9,6 +9,7 @@ const SearchResult = (props) => {
                             <div className="container">
                                 <p className="cardPrice">Price of the card:  {cardObj.price}</p>
                                 < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
+                                <button className="searchButton"> Delete this custom card </button>
                             </div>
                         </div>
                     )
