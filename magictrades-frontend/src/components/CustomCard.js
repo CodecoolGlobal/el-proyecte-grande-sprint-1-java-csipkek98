@@ -10,13 +10,14 @@ const CustomCard = () => {
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
-    const url = `http://localhost:8080/custom`;
+    // const url = "http://localhost:8080";
+    const URI = `http://localhost:8080/custom`;
     const [isShown, setIsShown] = useState(false);
     const handleClick = event => {
         setIsShown(current => !current);
     };
     const fetchCards =  () => {
-         axios.get(url
+         axios.get(URI
         ).then((response) => {
             console.log(response);
             const data = response.data;
@@ -28,7 +29,7 @@ const CustomCard = () => {
     },[]);
     const postData = (e) => {
         e.preventDefault();
-        axios.post(url,{
+        axios.post(URI,{
             name: inputName,
             price: inputPrice, pic: inputPic
         })
@@ -38,7 +39,7 @@ const CustomCard = () => {
     }
     const removeUser = async id => {
         try {
-            const res = await axios.delete(`${url}/${id}`)
+            const res = await axios.delete(`${URI}/${id}`)
             await fetchCards()
         } catch (error) {
             alert(error)
