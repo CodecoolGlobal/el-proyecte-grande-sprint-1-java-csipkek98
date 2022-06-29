@@ -1,17 +1,18 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.Data_sample.CustomCardCreator;
+import com.WizardsOfTheCoast.magic.entity.CollectionEntity;
 import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
-import com.WizardsOfTheCoast.magic.model.CardModel;
-import com.WizardsOfTheCoast.magic.service.CardService;
+import com.WizardsOfTheCoast.magic.service.CollectionService;
 import com.WizardsOfTheCoast.magic.service.customCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URISyntaxException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+
 
 
 @CrossOrigin(origins = {"http://localhost:3000","https://lemon-stone-05afd8203.1.azurestaticapps.net", "http://localhost:4200"},
@@ -20,6 +21,11 @@ import java.util.UUID;
 @RestController
 public class CustomCardController {
     private customCardService cardService;
+    private CollectionService collectionService;
+
+    public CustomCardController(CollectionService collectionService) {
+        this.collectionService = collectionService;
+    }
 
     @Autowired
     public void setService(customCardService cardService) {
@@ -28,10 +34,10 @@ public class CustomCardController {
 
     @GetMapping(value = "/")
     public List<CustomCardEntity> Greetings(){
-        initCards();
-        for(CustomCardEntity card: cardService.getAllCustomCard()){
-            System.out.println(card.getName() + "init");
-        }
+//        initCards();
+//        for(CustomCardEntity card: cardService.getAllCustomCard()){
+//            System.out.println(card.getName() + "init");
+//        }
         return cardService.getAllCustomCard();
     }
 
@@ -48,8 +54,20 @@ public class CustomCardController {
                 .imageUrl((String)payLoad.get("pic"))
                 .price(Integer.parseInt((String)payLoad.get("price")))
         .build();
+        CollectionEntity collection = collectionService.getCollection(1L);
+        customCard.setCollection(collection);
         cardService.addCard(customCard);
         return customCard;
+    }
+
+    @PostMapping(value = "/custom/create")
+    public CollectionEntity addCollection(){
+        List<CustomCardEntity> empty = new ArrayList<>();
+        CollectionEntity collection = CollectionEntity.builder()
+                .cards(empty)
+                .build();
+        collectionService.saveCollection(collection);
+        return collection;
     }
 
     @DeleteMapping(value = "/custom/{id}")

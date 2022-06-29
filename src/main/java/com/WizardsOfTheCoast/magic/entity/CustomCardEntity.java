@@ -1,6 +1,9 @@
 package com.WizardsOfTheCoast.magic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -9,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name ="CustomCard")
+@Table(name = "customcard")
 public class CustomCardEntity {
     @Id
     @SequenceGenerator(
@@ -44,5 +48,10 @@ public class CustomCardEntity {
             columnDefinition = "integer"
     )
     private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "collection_id", nullable = false)
+    @JsonIgnore
+    private CollectionEntity collection;
 
 }

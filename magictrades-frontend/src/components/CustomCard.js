@@ -12,6 +12,7 @@ const CustomCard = () => {
     const [getCustomCards, setCustomCardData] = useState([]);
     // const url = "http://localhost:8080";
     const URI = `http://localhost:8080/custom`;
+    const createURL = `http://localhost:8080/custom/create`
     const [isShown, setIsShown] = useState(false);
     const handleClick = event => {
         setIsShown(current => !current);
@@ -36,6 +37,15 @@ const CustomCard = () => {
             .then((res) => {
                 setCustomCardData([...getCustomCards, res.data])
             });
+    }
+
+    const createCollection =(ev) =>{
+        ev.preventDefault();
+        axios.post(createURL)
+            .then((res) => {
+                console.log(res);
+            });
+
     }
     const removeUser = async id => {
         try {
@@ -70,6 +80,7 @@ const CustomCard = () => {
                    autoComplete="off"
             />
             <button className="searchButton" onClick={postData}>Add custom card ! </button>
+            <button className="searchButton" onClick={createCollection}>Create collection ! </button>
             <br/>
             <br/>
             <br/>
