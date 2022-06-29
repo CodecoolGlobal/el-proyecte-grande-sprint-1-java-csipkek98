@@ -69,3 +69,26 @@ li a:hover {
   font-size: 1rem;
 
 }
+
+.userInput{
+  display: grid;
+  justify-content: center;
+}
+
+form{
+  margin-bottom: 1em;
+}
+
+#userRegister{
+  width: 75px;
+  height: auto;
+}
+
+tr{
+  justify-self: center;
+  line-height: 25px;
+}
+td{
+  text-align: center;
+  vertical-align: center;
+}
