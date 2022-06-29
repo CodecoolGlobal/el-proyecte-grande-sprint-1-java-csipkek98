@@ -3,14 +3,16 @@ body{
   background-color: navajowhite;
 }
 h1{
-  text-align: center;
-  margin: auto;
-  font-size: 5vmin;
-  line-height: 1.1;
+  color:black;
 }
 img{
-  width: 15%;
+  width: 70%;
   height: auto;
+  border-radius: 25px;
+  text-align: center;
+  border-width: 20px;
+  border-style: groove;
+  Border-color: green;
 }
 
 /*NAVBAR*/
@@ -40,13 +42,15 @@ li a:hover {
 }
 
 .container {
-  display: flex;
-  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container p {
-  margin-left: 37em;
+  margin-left: 39em;
   padding: 20px;
+
 }
 
 .searchButton{
@@ -91,4 +95,25 @@ tr{
 td{
   text-align: center;
   vertical-align: center;
+}
+
+.cardPrice{
+  color: black;
+  font-weight:600;
+  font-size: 20px;
+}
+
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.products img {
+  margin: 0.5em 0;
+
 }

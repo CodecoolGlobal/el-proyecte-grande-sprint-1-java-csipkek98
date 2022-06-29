@@ -1,15 +1,15 @@
 import React from 'react';
-import axios from "axios";
+
 const SearchResult = (props) => {
     return (
-        <div>
+        <div className="productsContainer">
             {
                 props.data.map(cardObj => (
-                        <div key={cardObj.id}>
+                        <div  key={cardObj.id}>
                             <h1>{cardObj.name}</h1>
-                            <div className="container">
+                            <div >
                                 <p className="cardPrice">Price of the card:  {cardObj.price}</p>
-                                < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
+                                < img src={cardObj.imageUrl} alt="new" className="products img" />
                             </div>
                         </div>
                     )
