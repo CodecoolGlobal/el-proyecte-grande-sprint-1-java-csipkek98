@@ -32,4 +32,6 @@ public class NewsEntity {
     private Date publicationDate;
     @Column(name =" description", nullable = false)
     private String description;
+    @Column(name ="title", nullable = false)
+    private String title;
 }
