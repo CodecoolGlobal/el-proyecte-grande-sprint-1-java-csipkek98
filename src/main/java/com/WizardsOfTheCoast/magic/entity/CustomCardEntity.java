@@ -49,7 +49,7 @@ public class CustomCardEntity {
     )
     private int price;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tutorial_id", nullable = false)
+    @JoinColumn(name = "custom_card_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private CollectionEntity collection;
