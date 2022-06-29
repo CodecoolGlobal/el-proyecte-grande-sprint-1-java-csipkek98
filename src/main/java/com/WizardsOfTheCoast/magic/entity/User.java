@@ -21,6 +21,9 @@ public class User {
     private String username;
     private String email;
     private String password;
+    @OneToOne
+    @JsonIgnore
+    private CollectionEntity collectionEntity;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
