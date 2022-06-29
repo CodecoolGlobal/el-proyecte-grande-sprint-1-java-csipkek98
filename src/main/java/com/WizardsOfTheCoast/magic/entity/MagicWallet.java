@@ -1,6 +1,7 @@
 package com.WizardsOfTheCoast.magic.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +19,10 @@ public class MagicWallet {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(mappedBy = "currency")
+    @JsonIgnore
     private User user;
-    private int amount;
+    private int amount = 0;
 }
