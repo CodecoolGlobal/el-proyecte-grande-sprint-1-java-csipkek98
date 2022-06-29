@@ -27,18 +27,17 @@ public class CustomCardController {
     }
 
     @GetMapping(value = "/")
-    public void Greetings(){
+    public List<CustomCardEntity> Greetings(){
         initCards();
         for(CustomCardEntity card: cardService.getAllCustomCard()){
-            System.out.println(card.getName());
+            System.out.println(card.getName() + "init");
         }
+        return cardService.getAllCustomCard();
     }
 
     @GetMapping(value = "/custom")
     public List<CustomCardEntity> getClients() {
-        if (cardService.getAllCustomCard().size() < 2) {
-            initCards();
-        }
+
         return cardService.getAllCustomCard();
     }
 

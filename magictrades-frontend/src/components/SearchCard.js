@@ -3,11 +3,11 @@ import axios from 'axios';
 import SearchResult from "./SearchResult";
 
 const SearchCard = () => {
-    const [inputName, setName] = useState(null);
-    const [inputRarity, setRarity] = useState(null);
+    const [inputName, setName] = useState('');
+    const [inputRarity, setRarity] = useState('');
     const [getCards, setGetCardData] = useState([]);
     // const url = `${process.env.REACT_APP_HOST_URL}/search${inputName}`;
-    let url = `${process.env.REACT_APP_HOST_URL}/card/filter?`;
+    let url = `http://localhost:8080/card/filter?`;
     const fetchCards = async () => {
         await axios.get(url).then((response) => {
             console.log(response);

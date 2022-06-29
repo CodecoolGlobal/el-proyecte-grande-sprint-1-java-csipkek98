@@ -1,9 +1,7 @@
 package com.WizardsOfTheCoast.magic.Data_sample;
 
 import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
-import com.WizardsOfTheCoast.magic.model.CardModel;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
