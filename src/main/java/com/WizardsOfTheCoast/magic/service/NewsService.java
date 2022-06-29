@@ -21,4 +21,7 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
+    public void addNews(NewsEntity newsEntity){
+        newsRepository.save(newsEntity);
+    }
 }
