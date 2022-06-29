@@ -48,11 +48,10 @@ public class CustomCardEntity {
             columnDefinition = "integer"
     )
     private int price;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "custom_card_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "collection_id", nullable = false)
     @JsonIgnore
     private CollectionEntity collection;
-
 
 }

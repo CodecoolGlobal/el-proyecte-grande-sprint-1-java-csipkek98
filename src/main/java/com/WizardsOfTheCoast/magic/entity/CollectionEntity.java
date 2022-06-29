@@ -20,7 +20,7 @@ public class CollectionEntity {
     @Column(name = "id", nullable = false, updatable = false)
     @SequenceGenerator(
             name = "collection_sequence",
-            sequenceName = "custom_card_sequence",
+            sequenceName = "collection_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
@@ -28,11 +28,8 @@ public class CollectionEntity {
             generator = "collection_sequence"
     )
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "collection_id",
-            referencedColumnName = "id"
-    )
+    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<CustomCardEntity> cards = new ArrayList<>();
 
 

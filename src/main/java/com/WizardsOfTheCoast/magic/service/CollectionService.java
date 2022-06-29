@@ -26,4 +26,12 @@ public class CollectionService {
     public List<CollectionEntity> getAllCollection(){
         return collectionRepository.findAll();
     }
+
+    public void saveCollection(CollectionEntity collection){
+        collectionRepository.save(collection);
+    }
+
+    public CollectionEntity getCollection(Long collectionId){
+        return collectionRepository.findById(collectionId).get();
+    }
 }
