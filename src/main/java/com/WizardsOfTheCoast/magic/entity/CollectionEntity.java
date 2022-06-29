@@ -6,12 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name= "Collection")
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "collection")
 public class CollectionEntity {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
@@ -25,6 +28,12 @@ public class CollectionEntity {
             generator = "collection_sequence"
     )
     private Long id;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "collection_id",
+            referencedColumnName = "id"
+    )
+    private List<CustomCardEntity> cards = new ArrayList<>();
 
 
 }
