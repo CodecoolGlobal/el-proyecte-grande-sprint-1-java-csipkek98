@@ -34,4 +34,6 @@ public class CollectionService {
     public CollectionEntity getCollection(Long collectionId){
         return collectionRepository.findById(collectionId).get();
     }
+
+
 }

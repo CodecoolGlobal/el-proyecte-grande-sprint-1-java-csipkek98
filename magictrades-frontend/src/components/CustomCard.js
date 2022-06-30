@@ -1,7 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import SearchResult from "./SearchResult";
+import SearchCustomCard from "./SearchCustomCard";
 
 // useCallBack, useMemo, useContext
 
@@ -81,6 +81,7 @@ const CustomCard = () => {
             <br/>
             <br/>
             <br/>
+            <SearchCustomCard/>
             <div>
                 <button className="searchButton" onClick={handleClick}>Show all custom card</button>
                 {isShown && <div>
