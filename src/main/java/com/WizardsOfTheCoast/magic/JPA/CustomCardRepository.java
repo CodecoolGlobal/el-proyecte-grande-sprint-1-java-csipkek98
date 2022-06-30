@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component("CustomCardRepository")
 public interface CustomCardRepository extends JpaRepository<CustomCardEntity, Long> {
+
+    CustomCardEntity findByName(String name);
 }
