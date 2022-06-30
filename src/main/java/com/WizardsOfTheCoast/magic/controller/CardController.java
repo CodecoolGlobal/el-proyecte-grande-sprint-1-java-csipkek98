@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000","https://lemon-stone-05afd8203.1.azurestaticapps.net"},
+@CrossOrigin(origins = {"http://localhost:3000","https://lemon-stone-05afd8203.1.azurestaticapps.net", "http://localhost:4200"},
         methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
         , allowedHeaders = "*")
 @RestController
@@ -20,7 +20,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/search{name}")
+    @GetMapping(value = "/search/{name}")
     public List<CardModel> getAllCardsTest(@PathVariable (required = false) String name){
         List<String> parameters = new ArrayList<>();
         parameters.add("name="+name);
