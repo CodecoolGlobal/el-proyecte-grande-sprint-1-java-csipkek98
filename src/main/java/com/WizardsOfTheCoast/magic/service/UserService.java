@@ -21,8 +21,18 @@ public class UserService {
     @Autowired
     CollectionRepository collectionRepository;
 
-    public List<User> findUsersByName(String name){
-        return userRepository.findByUsername(name);
+    public User findUserByNameOrEmail(String name, String email, String password){
+        User user;
+        if(email != null){
+            user = userRepository.findByEmail(email);
+        }else{
+            user = userRepository.findByUsername(name);
+        }
+        if(password.equals(user.getPassword())){
+            return user;
+        }else{
+            return null;
+        }
     }
 
     public List<User> checkIfUserIsAlreadyExist(String name, String email){
