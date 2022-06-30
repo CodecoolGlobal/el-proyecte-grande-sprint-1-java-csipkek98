@@ -36,5 +36,7 @@ public class Orders {
     @MapsId
     @JsonIgnore
     private User user;
+    @Column(name="card_amount", nullable = false)
+    private int amountOfCards;
 
 }
