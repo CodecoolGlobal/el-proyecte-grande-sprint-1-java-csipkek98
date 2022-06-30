@@ -12,7 +12,6 @@ const CustomCard = () => {
     const [getCustomCards, setCustomCardData] = useState([]);
     // const url = "http://localhost:8080";
     const URI = `http://localhost:8080/custom`;
-    const createURL = `http://localhost:8080/custom/create`
     const [isShown, setIsShown] = useState(false);
     const sessionAttributes = sessionStorage.getItem('id')
     const handleClick = event => {
@@ -38,7 +37,13 @@ const CustomCard = () => {
         })
             .then((res) => {
                 setCustomCardData([...getCustomCards, res.data])
+                if(sessionAttributes=== null){
+                    alert("You need to register and login to add a custom card ! ")
+                }
             });
+        if(sessionAttributes=== null){
+            alert("You need to register and login to add a custom card ! ")
+        }
     }
     const removeUser = async id => {
         try {
