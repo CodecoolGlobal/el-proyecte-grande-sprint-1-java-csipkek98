@@ -4,6 +4,7 @@ import Home from "./Home";
 import SearchCard from "./SearchCard";
 import CustomCard from "./CustomCard";
 import RegisterUser from "./RegisterUser";
+import LoginUser from "./LoginUser";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Navbar = () => {
                     <li id={"button-search"}><Link to="/search">Search</Link></li>
                     <li id={"button-custom"}><Link to="/custom">CustomCards</Link></li>
                     <li id={"button-register"}><Link to="/register">Register</Link></li>
-                    <li><Link className="active" to="#about">Login</Link></li>
+                    <li id={"button-login"}><Link to="/login" >Login</Link></li>
                 </ul>
                 <div>
                     <Routes>
@@ -27,6 +28,7 @@ const Navbar = () => {
                         <Route path="/search" element={<SearchCard/>} />
                         <Route path="/custom" element={<CustomCard/>} />
                         <Route path="/register" element={<RegisterUser/>} />
+                        <Route path="/login" element={<LoginUser/>} />
                     </Routes>
                 </div>
             </div>
