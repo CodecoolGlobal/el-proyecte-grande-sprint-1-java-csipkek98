@@ -4,6 +4,10 @@ body{
 }
 h1{
   color:black;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  height: 20vh;
 }
 img{
   width: 70%;

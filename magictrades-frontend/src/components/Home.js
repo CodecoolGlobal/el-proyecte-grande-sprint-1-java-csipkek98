@@ -24,7 +24,7 @@ function Home() {
     },[]);
     return (
         <div>
-            <b>Home</b>
+            <h1>Welcome to the Magic Trades !!!</h1>
         </div>
     );
 }
