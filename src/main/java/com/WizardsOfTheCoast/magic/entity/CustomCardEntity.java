@@ -53,5 +53,9 @@ public class CustomCardEntity {
     @JoinColumn(name = "collection_id", nullable = false)
     @JsonIgnore
     private CollectionEntity collection;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnore
+    private OrderEntity order;
 
 }
