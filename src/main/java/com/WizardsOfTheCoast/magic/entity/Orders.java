@@ -1,5 +1,6 @@
 package com.WizardsOfTheCoast.magic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,9 @@ public class Orders {
     @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<CustomCardEntity> cards = new ArrayList<>();
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JsonIgnore
+    private User user;
 
 }
