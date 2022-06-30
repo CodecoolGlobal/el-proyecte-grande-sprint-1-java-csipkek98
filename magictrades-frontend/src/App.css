@@ -92,3 +92,8 @@ td{
   text-align: center;
   vertical-align: center;
 }
+
+#h1register,#h1login{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
