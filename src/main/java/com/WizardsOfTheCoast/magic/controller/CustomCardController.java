@@ -78,8 +78,8 @@ public class CustomCardController {
 
     @GetMapping(value = "custom/{id}/{name}")
     public CustomCardEntity findCustomCardByName(@PathVariable String id, @PathVariable String name){
-        System.out.println(cardService.findCustomCardFromCollectionByName(Long.valueOf(id), name).getName());
-        return cardService.findCustomCardFromCollectionByName(Long.valueOf(id), name);
+        CollectionEntity collection = collectionService.getCollection(Long.valueOf(id));
+        return cardService.findCustomCardFromCollectionByName(collection.getCards(), name);
     }
 
     public void initCards(){

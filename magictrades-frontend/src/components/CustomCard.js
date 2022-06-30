@@ -1,7 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import SearchResult from "./SearchResult";
+import SearchCustomCard from "./SearchCustomCard";
 
 // useCallBack, useMemo, useContext
 
@@ -9,7 +9,6 @@ const CustomCard = () => {
     const [inputName, setName] = useState("");
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
-    const [searchName, setSearchName] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
     // const url = "http://localhost:8080";
     const URI = `http://localhost:8080/custom`;
@@ -58,14 +57,6 @@ const CustomCard = () => {
          fetchCards()
     }, [])
 
-    const searchByName = () => {
-         axios.get(`http://localhost:8080/custom/${sessionAttributes}/${searchName}`, {params:
-                 {sessionId: sessionAttributes,
-                 name : searchName}})
-             .then(r => console.log(r));
-
-     }
-
     return (
         <div>
             <label>Card Name</label>
@@ -90,16 +81,7 @@ const CustomCard = () => {
             <br/>
             <br/>
             <br/>
-            <label>Search by name</label>
-            <input className="searchField" type="text" id="searchName" name="Search By Name"
-                   value={searchName}
-                   onChange={(event) => setSearchName(event.target.value)}
-                   autoComplete="off"
-            />
-            <button className="searchButton" onClick={searchByName}>Search ! </button>
-            <div>
-                <p ></p>
-            </div>
+            <SearchCustomCard/>
             <div>
                 <button className="searchButton" onClick={handleClick}>Show all custom card</button>
                 {isShown && <div>
