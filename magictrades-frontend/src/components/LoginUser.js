@@ -7,7 +7,7 @@ function LoginUser() {
     const url = `http://localhost:8080/`;
     const [userNameOrEmail, setNameOrEmail] = useState("");
     const [userPassword, setPassword] = useState("");
-    let userData = null;
+    let userData = "";
     let navigate = useNavigate();
 
     async function loginUserEvent() {
@@ -26,11 +26,15 @@ function LoginUser() {
             await axios.post(url + "login", {email: userNameOrEmail, password: userPassword})
                 .then((response) => {
                     userData = response.data;
+                }).catch(function(status){
+                    alert(status)
                 });
         } else {
             await axios.post(url + "login", {username: userNameOrEmail, password: userPassword})
                 .then((response) => {
                     userData = response.data;
+                }).catch(function(){
+                    alert("Something went wrong, please try again!")
                 });
         }
     }
