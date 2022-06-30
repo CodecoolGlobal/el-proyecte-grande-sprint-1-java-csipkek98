@@ -1,5 +1,6 @@
 import axios from "axios";
-import {useState} from "react";
+import React, {useState} from "react";
+import {Navigate, useNavigate} from "react-router-dom";
 
 
 function LoginUser() {
@@ -7,18 +8,16 @@ function LoginUser() {
     const [userNameOrEmail, setNameOrEmail] = useState("");
     const [userPassword, setPassword] = useState("");
     let userData = null;
-
+    let navigate = useNavigate();
 
     async function loginUserEvent() {
         // const url = `${process.env.REACT_APP_HOST_URL}/register`;
         await checkUserCredentials(url)
-        console.log(userData)
-        if (userData === "") {
-            console.log("User doesn't exist!")
-        } else {
-            console.log("User Logged in!")
+        if (userData !== "") {
             sessionStorage.setItem("id", userData.id)
             sessionStorage.setItem("username",userData.username)
+            navigate("../");
+            alert("You are logged in as: "+userData.username)
         }
     }
 
