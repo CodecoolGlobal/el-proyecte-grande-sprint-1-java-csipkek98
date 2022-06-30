@@ -54,7 +54,8 @@ public class CustomCardController {
                 .imageUrl((String)payLoad.get("pic"))
                 .price(Integer.parseInt((String)payLoad.get("price")))
         .build();
-        CollectionEntity collection = collectionService.getCollection(1L);
+        long l=Long.parseLong((String) payLoad.get("sessionId"));
+        CollectionEntity collection = collectionService.getCollection(l);
         customCard.setCollection(collection);
         cardService.addCard(customCard);
         return customCard;

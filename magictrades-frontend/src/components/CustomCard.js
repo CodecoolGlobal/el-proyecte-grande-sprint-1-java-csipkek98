@@ -14,6 +14,7 @@ const CustomCard = () => {
     const URI = `http://localhost:8080/custom`;
     const createURL = `http://localhost:8080/custom/create`
     const [isShown, setIsShown] = useState(false);
+    const sessionAttributes = sessionStorage.getItem('id')
     const handleClick = event => {
         setIsShown(current => !current);
     };
@@ -32,7 +33,8 @@ const CustomCard = () => {
         e.preventDefault();
         axios.post(URI,{
             name: inputName,
-            price: inputPrice, pic: inputPic
+            price: inputPrice, pic: inputPic,
+            sessionId: sessionAttributes
         })
             .then((res) => {
                 setCustomCardData([...getCustomCards, res.data])
