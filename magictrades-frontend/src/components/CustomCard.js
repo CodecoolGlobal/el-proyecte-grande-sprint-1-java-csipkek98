@@ -40,15 +40,6 @@ const CustomCard = () => {
                 setCustomCardData([...getCustomCards, res.data])
             });
     }
-
-    const createCollection =(ev) =>{
-        ev.preventDefault();
-        axios.post(createURL)
-            .then((res) => {
-                console.log(res);
-            });
-
-    }
     const removeUser = async id => {
         try {
             const res = await axios.delete(`${URI}/${id}`)
@@ -82,7 +73,6 @@ const CustomCard = () => {
                    autoComplete="off"
             />
             <button className="searchButton" onClick={postData}>Add custom card ! </button>
-            <button className="searchButton" onClick={createCollection}>Create collection ! </button>
             <br/>
             <br/>
             <br/>
