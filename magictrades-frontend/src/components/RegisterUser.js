@@ -1,7 +1,7 @@
 import CustomCard from "./CustomCard";
 import axios from "axios";
 import {useState} from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import React from "react";
 
 
@@ -10,18 +10,24 @@ function RegisterUser() {
     const [userName, setName] = useState("");
     const [userEmail, setEmail] = useState("");
     const [userPassword, setPassword] = useState("");
+    let navigate = useNavigate();
     let isUserExist = false;
 
+    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
 
     async function registerUser() {
         // const url = `${process.env.REACT_APP_HOST_URL}/register`;
         await isUserAlreadyExist(url)
-        if (isUserExist) {
-            console.log("User is already created!")
-        } else {
-            console.log("User created!")
-            await register(url)}
+        if (!isUserExist && regex.test(userEmail)) {
+            await register(url)
+            navigate("../login");
+            alert("Account successfully created!")
+        }else if(!regex.test(userEmail)){
+            alert("Wrong email format, please try again!")
+        }else{
+            alert("User already exist, please try again!")
         }
+    }
 
     async function isUserAlreadyExist(url){
         await axios.post(url+"usercheck", {username: userName, email: userEmail})
