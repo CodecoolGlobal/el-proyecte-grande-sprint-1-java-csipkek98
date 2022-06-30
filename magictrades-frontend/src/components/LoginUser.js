@@ -34,7 +34,7 @@ function LoginUser() {
                 });
         }
     }
-
+    if(sessionStorage.getItem("id")===null){
     return (
         <div className={"userInput"}>
             <h1 id={"h1login"}>Login page:</h1>
@@ -73,5 +73,8 @@ function LoginUser() {
             </table>
         </div>
     );
+    }else{
+        return <Navigate to='/'  />
+    }
 }
 export default LoginUser;
