@@ -35,4 +35,14 @@ public class customCardService {
         customCardRepository.delete(customCardEntity);
     }
 
+    public CustomCardEntity findCustomCardFromCollectionByName(Long collectionId, String name){
+        List<CustomCardEntity> cards = customCardRepository.findAllById(collectionId);
+        for (CustomCardEntity card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+    }
+
 }

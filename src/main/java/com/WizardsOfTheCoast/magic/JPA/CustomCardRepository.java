@@ -4,8 +4,10 @@ import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component("CustomCardRepository")
 public interface CustomCardRepository extends JpaRepository<CustomCardEntity, Long> {
 
-    CustomCardEntity findByName(String name);
+    List<CustomCardEntity>findAllById(Long collectionId);
 }
