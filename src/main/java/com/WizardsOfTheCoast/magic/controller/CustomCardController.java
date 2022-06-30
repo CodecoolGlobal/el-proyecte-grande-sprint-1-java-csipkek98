@@ -76,6 +76,10 @@ public class CustomCardController {
         cardService.deleteCustomCardById(Long.parseLong(id));
     }
 
+    @GetMapping(value = "custom/{id}/{name}")
+    public CustomCardEntity findCustomCardByName(@PathVariable String id, @PathVariable String name{
+        return cardService.findCustomCardFromCollectionByName(Long.valueOf(id), name);
+    }
 
     public void initCards(){
         List<CustomCardEntity> initCards = CustomCardCreator.initialize();
