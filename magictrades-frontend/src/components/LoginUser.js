@@ -42,7 +42,7 @@ function LoginUser() {
                 <tbody>
                 <tr>
                     <td>
-                        <label className={"userData"}>Username:<br/>
+                        <label className={"userData"}>Username/email:<br/>
                             <input id={"userName"} type={"text"} value={userNameOrEmail}
                                    onChange={(event) => setNameOrEmail(event.target.value)}/>
                         </label>
