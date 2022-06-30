@@ -2,8 +2,6 @@ package com.WizardsOfTheCoast.magic.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -54,8 +52,8 @@ public class CustomCardEntity {
     @JsonIgnore
     private CollectionEntity collection;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "orders_id", nullable = false)
     @JsonIgnore
-    private OrderEntity order;
+    private Orders orders;
 
 }

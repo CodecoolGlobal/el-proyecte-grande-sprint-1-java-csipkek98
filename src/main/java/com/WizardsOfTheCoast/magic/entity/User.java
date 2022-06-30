@@ -29,9 +29,5 @@ public class User {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @JsonIgnore
     private MagicWallet currency;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    @JsonIgnore
-    private OrderEntity order;
 
 }

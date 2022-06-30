@@ -1,6 +1,5 @@
 package com.WizardsOfTheCoast.magic.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +9,13 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "Order")
+@Entity(name = "Orders")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "order")
-public class OrderEntity {
+@Table(name = "orders")
+public class Orders {
     @Id
     @Column(name = "id", nullable = false)
     @SequenceGenerator(
@@ -29,12 +28,9 @@ public class OrderEntity {
             generator = "order_sequence"
     )
     private Long id;
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<CustomCardEntity> orderedCards = new ArrayList<>();
-    @OneToOne(mappedBy = "order")
-    @JsonIgnore
-    private User user;
+    private List<CustomCardEntity> cards = new ArrayList<>();
 
 
 }
