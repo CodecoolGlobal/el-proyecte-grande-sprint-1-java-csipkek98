@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping("/usercheck")
     public List<User> getUsersWithName(@RequestBody Map<String, String> payload){
         System.out.println(payload);
-            return userService.findUsersByNameOrEmail(payload.get("username"), payload.get("email"));
+            return userService.checkIfUserIsAlreadyExist(payload.get("username"), payload.get("email"));
     }
 
     @PostMapping("/register")
@@ -28,4 +28,8 @@ public class UserController {
         userService.createNewUser(newUser);
     }
 
+    @PostMapping("/login")
+    public User loginWithUserData(@RequestBody Map<String, String> payload){
+        return userService.findUserByNameOrEmail(payload.get("username"), payload.get("email"), payload.get("password"));
+    }
 }

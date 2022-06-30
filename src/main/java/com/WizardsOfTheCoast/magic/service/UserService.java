@@ -21,11 +21,21 @@ public class UserService {
     @Autowired
     CollectionRepository collectionRepository;
 
-    public List<User> findUsersByName(String name){
-        return userRepository.findByUsername(name);
+    public User findUserByNameOrEmail(String name, String email, String password){
+        User user;
+        if(email != null){
+            user = userRepository.findByEmail(email);
+        }else{
+            user = userRepository.findByUsername(name);
+        }
+        if(password.equals(user.getPassword())){
+            return user;
+        }else{
+            return null;
+        }
     }
 
-    public List<User> findUsersByNameOrEmail(String name, String email){
+    public List<User> checkIfUserIsAlreadyExist(String name, String email){
         return userRepository.findByUsernameOrEmail(name,email);
     }
 
@@ -35,7 +45,7 @@ public class UserService {
         createNewCollectionForUser(savedUserWithWallet);
     }
 
-    public User createNewWalletForUser(User user){
+    private User createNewWalletForUser(User user){
         MagicWallet newWallet = new MagicWallet();
         newWallet.setUser(user);
         MagicWallet userWallet = magicWalletRepository.save(newWallet);
@@ -43,7 +53,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void createNewCollectionForUser(User user){
+    private void createNewCollectionForUser(User user){
         CollectionEntity collection = new CollectionEntity();
         collection.setUser(user);
         CollectionEntity collectionWithUser = collectionRepository.save(collection);

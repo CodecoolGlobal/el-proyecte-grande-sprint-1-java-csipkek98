@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findByUsername(String username);
+    User findByUsername(String username);
+    User findByEmail(String email);
     @Query("SELECT r FROM User r WHERE r.username = ?1 OR r.email = ?2")
     List<User> findByUsernameOrEmail(String username, String email);
 }

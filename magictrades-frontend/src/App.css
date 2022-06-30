@@ -97,6 +97,11 @@ td{
   vertical-align: center;
 }
 
+#h1register,#h1login{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .cardPrice{
   color: black;
   font-weight:600;
@@ -131,3 +136,4 @@ td{
   align-items:center;
   height: 20vh;
 }
+
