@@ -1,6 +1,8 @@
 import CustomCard from "./CustomCard";
 import axios from "axios";
 import {useState} from "react";
+import {Navigate} from "react-router-dom";
+import React from "react";
 
 
 function RegisterUser() {
@@ -32,6 +34,7 @@ function RegisterUser() {
     const register = async (url) => {
         await axios.post(url+"register",{username: userName, email: userEmail, password: userPassword});
     }
+    if(sessionStorage.getItem("id") === null){
     return (
         <div className={"userInput"}>
             <h1 id={"h1register"}>Registration page:</h1>
@@ -82,6 +85,9 @@ function RegisterUser() {
             </table>
         </div>
     );
+    }else{
+        return <Navigate to='/'  />
+    }
 }
 
 
