@@ -12,8 +12,8 @@ const CustomCard = () => {
     const [getCustomCards, setCustomCardData] = useState([]);
     // const url = "http://localhost:8080";
     const URI = `http://localhost:8080/custom`;
-    const createURL = `http://localhost:8080/custom/create`
     const [isShown, setIsShown] = useState(false);
+    const sessionAttributes = sessionStorage.getItem('id')
     const handleClick = event => {
         setIsShown(current => !current);
     };
@@ -32,20 +32,18 @@ const CustomCard = () => {
         e.preventDefault();
         axios.post(URI,{
             name: inputName,
-            price: inputPrice, pic: inputPic
+            price: inputPrice, pic: inputPic,
+            sessionId: sessionAttributes
         })
             .then((res) => {
                 setCustomCardData([...getCustomCards, res.data])
+                if(sessionAttributes=== null){
+                    alert("You need to register and login to add a custom card ! ")
+                }
             });
-    }
-
-    const createCollection =(ev) =>{
-        ev.preventDefault();
-        axios.post(createURL)
-            .then((res) => {
-                console.log(res);
-            });
-
+        if(sessionAttributes=== null){
+            alert("You need to register and login to add a custom card ! ")
+        }
     }
     const removeUser = async id => {
         try {
@@ -80,7 +78,6 @@ const CustomCard = () => {
                    autoComplete="off"
             />
             <button className="searchButton" onClick={postData}>Add custom card ! </button>
-            <button className="searchButton" onClick={createCollection}>Create collection ! </button>
             <br/>
             <br/>
             <br/>
