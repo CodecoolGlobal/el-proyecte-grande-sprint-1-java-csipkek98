@@ -4,6 +4,10 @@ body{
 }
 h1{
   color:black;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  height: 20vh;
 }
 img{
   width: 70%;
@@ -61,6 +65,7 @@ li a:hover {
   border-radius: 5px;
   cursor: pointer;
   margin-right: 25px;
+
 }
 
 
@@ -71,6 +76,7 @@ li a:hover {
   border-bottom-left-radius: 8px;
   border-color: transparent;
   font-size: 1rem;
+
 
 }
 
@@ -136,4 +142,5 @@ td{
   align-items:center;
   height: 20vh;
 }
+
 
