@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import {useEffect, useState} from "react";
-const url = "http://localhost:8080";
+import SimpleSearch from "./SimpleSearch";
+const url = "http://localhost:8080/";
 const fetchCards = (abortController) => {
     return axios.get(url, {signal: abortController.signal})
 }
@@ -24,7 +25,8 @@ function Home() {
     },[]);
     return (
         <div>
-            <b>Home</b>
+            <h1>Welcome to the Magic Trades !!!</h1>
+            <SimpleSearch/>
         </div>
     );
 }
