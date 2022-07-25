@@ -29,5 +29,7 @@ public class User {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     @JsonIgnore
     private MagicWallet currency;
-
+    @OneToOne
+    @JsonIgnore
+    private Orders orders;
 }

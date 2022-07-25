@@ -19,7 +19,7 @@ const Navbar = ({name}) => {
         menu=<ul id={"navbar"}>
             <li id={"button-home"}><Link to="/">Home</Link></li>
             <li id={"button-random"}><Link to="/random">Random</Link></li>
-            <li id={"button-search"}><Link to="/search">Search</Link></li>
+            <li id={"button-search"}><Link to="/search">Advanced Search</Link></li>
             <li id={"button-custom"}><Link to="/custom">CustomCards</Link></li>
             <li id={"button-logout"}><Link to="/logout">Logout</Link></li>
         </ul>
@@ -27,7 +27,7 @@ const Navbar = ({name}) => {
         menu=<ul id={"navbar"}>
             <li id={"button-home"}><Link to="/">Home</Link></li>
             <li id={"button-random"}><Link to="/random">Random</Link></li>
-            <li id={"button-search"}><Link to="/search">Search</Link></li>
+            <li id={"button-search"}><Link to="/search">Advanced Search</Link></li>
             <li id={"button-custom"}><Link to="/custom">CustomCards</Link></li>
             <li id={"button-register"}><Link to="/register">Register</Link></li>
             <li id={"button-login"}><Link to="/login" >Login</Link></li>

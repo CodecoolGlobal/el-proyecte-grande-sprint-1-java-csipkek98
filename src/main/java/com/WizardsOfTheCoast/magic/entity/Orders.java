@@ -10,33 +10,33 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name= "Collection")
-@Builder
+@Entity(name = "Orders")
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@Table(name = "collection")
-public class CollectionEntity {
+@AllArgsConstructor
+@Table(name = "orders")
+public class Orders {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false)
     @SequenceGenerator(
-            name = "collection_sequence",
-            sequenceName = "collection_sequence",
+            name = "order_sequence",
+            sequenceName = "order_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "collection_sequence"
+            generator = "order_sequence"
     )
     private Long id;
-    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<CustomCardEntity> cards = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JsonIgnore
     private User user;
-
-
+    @Column(name="card_amount", nullable = false)
+    private int amountOfCards;
 
 }
