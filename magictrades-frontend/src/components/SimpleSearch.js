@@ -10,7 +10,9 @@ const SimpleSearch = () => {
     const url = `http://localhost:8080/search/${inputName}`;
     let navigate = useNavigate();
     const routeChange = () =>{
-        let path = `/search`;
+    
+        let path = "/search";
+
         navigate(path);
     }
     const fetchCards = async () => {
@@ -47,3 +49,4 @@ const SimpleSearch = () => {
 };
 
 export default SimpleSearch;
+

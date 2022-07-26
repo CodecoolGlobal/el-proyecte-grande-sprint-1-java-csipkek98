@@ -1,13 +1,9 @@
 body{
   color:green;
-  background-color: navajowhite;
+  background-image: url("background.jpeg");
 }
 h1{
-  color:black;
-  display: flex;
-  justify-content:center;
-  align-items:center;
-  height: 20vh;
+  color:white;
 }
 img{
   width: 70%;
@@ -16,7 +12,7 @@ img{
   text-align: center;
   border-width: 20px;
   border-style: groove;
-  Border-color: green;
+  Border-color: gray;
 }
 
 /*NAVBAR*/
@@ -108,8 +104,8 @@ td{
   margin-bottom: 25px;
 }
 
-.cardPrice{
-  color: black;
+.cardPrice,.card-price{
+  color: white;
   font-weight:600;
   font-size: 20px;
 }
@@ -119,7 +115,26 @@ td{
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
+/*#card-details>div>img{*/
+/*  height: 50%;*/
+/*  width: auto;*/
+/*}*/
+#card-name,#card-id,#card-price{
+  display: grid;
+  justify-content: center;
+}
+#card-imageUrl{
+  display: grid;
+  justify-content: center;
+  margin-left: 150px;
+}
+.card-imageUrl{
+  height: 50%;
+  width: auto;
+  display: grid;
+  justify-content: center;
+  margin-left: 150px;
+}
 * {
   box-sizing: border-box;
 }
@@ -130,7 +145,7 @@ td{
 }
 
 .rarity{
-  color:black;
+  color:white;
   font-size:25px;
   padding: 15px;
 
@@ -141,6 +156,25 @@ td{
   justify-content:center;
   align-items:center;
   height: 20vh;
+}
+
+td>a, td>label, div>label{
+  color: white;
+}
+
+div>h1, .cardPrice{
+  display: grid;
+  justify-content: center;
+}
+.products-img{
+  margin-left: 80px;
+}
+
+.productsContainer{
+  justify-items: center;
+}
+.productsContainer>div{
+  margin-bottom: 50px;
 }
 
 
