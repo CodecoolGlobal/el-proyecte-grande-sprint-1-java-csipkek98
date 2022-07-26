@@ -29,9 +29,9 @@ public class Orders {
             generator = "order_sequence"
     )
     private Long id;
-    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<CustomCardEntity> cards = new ArrayList<>();
+//    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private List<CustomCardEntity> cards = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JsonIgnore
