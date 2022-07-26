@@ -1,6 +1,7 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.entity.User;
+import com.WizardsOfTheCoast.magic.service.CollectionService;
 import com.WizardsOfTheCoast.magic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,14 @@ import java.util.Map;
 @RestController
 public class UserController {
 
+
+    private UserService userService;
+    private CollectionService collectionService;
     @Autowired
-    UserService userService;
+    public UserController(UserService userService, CollectionService collectionService) {
+        this.userService = userService;
+        this.collectionService = collectionService;
+    }
 
     @PostMapping("/usercheck")
     public List<User> getUsersWithName(@RequestBody Map<String, String> payload){
