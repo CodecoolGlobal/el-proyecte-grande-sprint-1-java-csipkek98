@@ -4,11 +4,13 @@ import com.WizardsOfTheCoast.magic.JPA.CollectionRepository;
 import com.WizardsOfTheCoast.magic.JPA.MagicWalletRepository;
 import com.WizardsOfTheCoast.magic.JPA.UserRepository;
 import com.WizardsOfTheCoast.magic.entity.CollectionEntity;
+import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import com.WizardsOfTheCoast.magic.entity.MagicWallet;
 import com.WizardsOfTheCoast.magic.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,7 +56,10 @@ public class UserService {
     }
 
     private void createNewCollectionForUser(User user){
-        CollectionEntity collection = new CollectionEntity();
+        List<CustomCardEntity> empty = new ArrayList<>();
+        CollectionEntity collection = CollectionEntity.builder()
+                .cards(empty)
+                .build();
         collection.setUser(user);
         CollectionEntity collectionWithUser = collectionRepository.save(collection);
         user.setCollectionEntity(collectionWithUser);
