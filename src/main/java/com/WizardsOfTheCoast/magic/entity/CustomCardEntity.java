@@ -48,12 +48,12 @@ public class CustomCardEntity {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "collection_id", nullable = false)
+    @JoinColumn(name = "collection_id")
     @JsonIgnore
     private CollectionEntity collection;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "orders_id", nullable = false)
-    @JsonIgnore
-    private Orders orders;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "orders_id")
+//    @JsonIgnore
+//    private Orders orders;
 
 }
