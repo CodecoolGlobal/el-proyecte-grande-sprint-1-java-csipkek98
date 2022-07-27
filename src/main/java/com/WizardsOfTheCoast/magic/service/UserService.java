@@ -1,9 +1,7 @@
 package com.WizardsOfTheCoast.magic.service;
 
-import com.WizardsOfTheCoast.magic.JPA.CollectionRepository;
 import com.WizardsOfTheCoast.magic.JPA.MagicWalletRepository;
 import com.WizardsOfTheCoast.magic.JPA.UserRepository;
-import com.WizardsOfTheCoast.magic.entity.CollectionEntity;
 import com.WizardsOfTheCoast.magic.entity.MagicWallet;
 import com.WizardsOfTheCoast.magic.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,6 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     MagicWalletRepository magicWalletRepository;
-    @Autowired
-    CollectionRepository collectionRepository;
 
     public User findUserByNameOrEmail(String name, String email, String password){
         User user;
@@ -42,7 +38,6 @@ public class UserService {
     public void createNewUser(User user){
         User savedUser = userRepository.save(user);
         User savedUserWithWallet = createNewWalletForUser(savedUser);
-        createNewCollectionForUser(savedUserWithWallet);
     }
 
     private User createNewWalletForUser(User user){
@@ -53,11 +48,4 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    private void createNewCollectionForUser(User user){
-        CollectionEntity collection = new CollectionEntity();
-        collection.setUser(user);
-        CollectionEntity collectionWithUser = collectionRepository.save(collection);
-        user.setCollectionEntity(collectionWithUser);
-        userRepository.save(user);
-    }
 }
