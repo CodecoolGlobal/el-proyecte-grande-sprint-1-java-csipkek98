@@ -57,50 +57,89 @@ const CustomCard = () => {
          fetchCards()
     }, [])
 
-    return (
-        <div>
-            <label>Card Name</label>
-            <input className="searchField" type="text" id="inputName" name="name"
-                   value={inputName}
-                   onChange={(event) => setName(event.target.value)}
-                   autoComplete="off"
-            />
-            <label>Price</label>
-            <input className="searchField" type="text" id="inputPrice" name="price"
-                   value={inputPrice}
-                   onChange={(event) => setPrice(event.target.value)}
-                   autoComplete="off"
-            />
-            <label>Pic</label>
-            <input className="searchField" type="text" id="inputPrice" name="pic"
-                   value={inputPic}
-                   onChange={(event) => setPic(event.target.value)}
-                   autoComplete="off"
-            />
-            <button className="searchButton" onClick={postData}>Add custom card ! </button>
-            <br/>
-            <br/>
-            <br/>
-            <SearchCustomCard/>
+    function isAuthenticated(){
+        console.log(localStorage.getItem("jwt"))
+        const auth_url = URI;
+        const test = localStorage.getItem("jwt")
+        let asd = test.split(".")
+        // console.log(asd)
+        let result = ""
+        for (let i = 0; i < asd.length; i++) {
+            result += btoa(asd[i])
+            if(i !== asd.length-1){
+                result+="."
+            }
+        }
+        // console.log("64 encoded: ",result)
+        console.log(`token from storage: ${localStorage.getItem("jwt")}`)
+        const jwtToken = {
+            // 'Authorization': `Bearer ${btoa(localStorage.getItem("jwt"))}`,
+            'Authorization': `Bearer ${btoa(localStorage.getItem("jwt"))}`,
+        };
+        console.log("Token: ",jwtToken)
+        const reqInit = {
+            method: "get",
+            url: auth_url,
+            headers: jwtToken,
+        };
+        console.log(reqInit)
+        axios(reqInit)
+            .then((response) =>{
+            console.log(`Status: ${response.status}`)
+            console.log("kek")
+            return response.status >= 200 && response.status < 300;
+        })
+        console.log("not good path :(")
+        // console.log("Status code:",response)
+        return false;
+    }
+    if(isAuthenticated()){
+        return (
             <div>
-                <button className="searchButton" onClick={handleClick}>Show all custom card</button>
-                {isShown && <div>
-                    {
-                        getCustomCards.map(cardObj => (
-                                <div key={cardObj.id}>
-                                    <h1>{cardObj.name}</h1>
-                                    <div className="container">
-                                        <p className="cardPrice">Price of the card:  {cardObj.price}</p>
-                                        < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
-                                        <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                <label>Card Name</label>
+                <input className="searchField" type="text" id="inputName" name="name"
+                       value={inputName}
+                       onChange={(event) => setName(event.target.value)}
+                       autoComplete="off"
+                />
+                <label>Price</label>
+                <input className="searchField" type="text" id="inputPrice" name="price"
+                       value={inputPrice}
+                       onChange={(event) => setPrice(event.target.value)}
+                       autoComplete="off"
+                />
+                <label>Pic</label>
+                <input className="searchField" type="text" id="inputPrice" name="pic"
+                       value={inputPic}
+                       onChange={(event) => setPic(event.target.value)}
+                       autoComplete="off"
+                />
+                <button className="searchButton" onClick={postData}>Add custom card ! </button>
+                <br/>
+                <br/>
+                <br/>
+                <SearchCustomCard/>
+                <div>
+                    <button className="searchButton" onClick={handleClick}>Show all custom card</button>
+                    {isShown && <div>
+                        {
+                            getCustomCards.map(cardObj => (
+                                    <div key={cardObj.id}>
+                                        <h1>{cardObj.name}</h1>
+                                        <div className="container">
+                                            <p className="cardPrice">Price of the card:  {cardObj.price}</p>
+                                            < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
+                                            <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        )}
-                </div>}
+                                )
+                            )}
+                    </div>}
+                </div>
             </div>
-        </div>
-    );
+        );}else{
+            return <Navigate to={"/login"}/>
+        }
 };
 
 export default CustomCard;
