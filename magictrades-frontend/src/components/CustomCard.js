@@ -2,6 +2,7 @@ import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchCustomCard from "./SearchCustomCard";
+import {Navigate} from "react-router-dom";
 
 // useCallBack, useMemo, useContext
 
@@ -10,8 +11,7 @@ const CustomCard = () => {
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
-    // const url = "http://localhost:8080";
-    const URI = `http://localhost:8080/custom`;
+    const URI = `/api/custom`;
     const [isShown, setIsShown] = useState(false);
     const sessionAttributes = sessionStorage.getItem('id')
     const handleClick = event => {
