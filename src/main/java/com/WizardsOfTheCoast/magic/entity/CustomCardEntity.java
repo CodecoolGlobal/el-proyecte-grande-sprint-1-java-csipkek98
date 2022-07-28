@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -41,9 +43,6 @@ public class CustomCardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private DeckEntity deck;
 
     public boolean equals(Object object) {
         if (object == this)
@@ -66,12 +65,6 @@ public class CustomCardEntity {
         }
     }
 
-    public void setDeck(DeckEntity deck, boolean add) {
-        this.deck = deck;
-        if (deck != null && add) {
-            deck.addCard(this, false);
-        }
-    }
 
     @Override
     public String toString() {
@@ -80,7 +73,6 @@ public class CustomCardEntity {
                 ", name='" + name + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", price=" + price +
-                ", deck=" + deck +
                 '}';
     }
 }

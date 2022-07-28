@@ -1,7 +1,9 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
-import com.WizardsOfTheCoast.magic.service.customCardService;
+import com.WizardsOfTheCoast.magic.entity.User;
+import com.WizardsOfTheCoast.magic.service.UserService;
+import com.WizardsOfTheCoast.magic.service.CustomCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,12 +16,15 @@ import java.util.Map;
         , allowedHeaders = "*")
 @RestController
 public class CustomCardController {
-    private customCardService cardService;
+    private CustomCardService cardService;
+    private UserService userService;
 
     @Autowired
-    public void setService(customCardService cardService) {
+    public CustomCardController(CustomCardService cardService, UserService userService) {
         this.cardService = cardService;
+        this.userService = userService;
     }
+
 
     @GetMapping(value = "/")
     public List<CustomCardEntity> Greetings(){
@@ -27,10 +32,11 @@ public class CustomCardController {
         return cardService.getAllCustomCard();
     }
 
-    @GetMapping(value = "/custom")
-    public List<CustomCardEntity> getClients() {
-
-        return cardService.getAllCustomCard();
+    @GetMapping(value = "/custom/{id}")
+    public List<CustomCardEntity> getClients(@PathVariable String id) {
+        System.out.println(id);
+        User user = userService.findUserById(Long.valueOf(id));
+        return userService.getAllUserCards(Long.valueOf(id));
     }
 
     @PostMapping(value = "/custom")
@@ -41,19 +47,25 @@ public class CustomCardController {
                 .price(Integer.parseInt((String)payLoad.get("price")))
         .build();
         long l=Long.parseLong((String) payLoad.get("sessionId"));
+        User user = userService.findUserById(l);
+        user.addCard(customCard);
+        customCard.setUser(user);
         cardService.addCard(customCard);
         return customCard;
     }
 
 
-    @DeleteMapping(value = "/custom/{id}")
-    public void deleteCustomCard(@PathVariable String id){
+    @DeleteMapping(value = "/custom/user/{user_id}/card_id/{id}")
+    public void deleteCustomCard(@PathVariable String id, @PathVariable String user_id){
+        CustomCardEntity cardToDelete = cardService.findCardById(Long.valueOf(id));
+        userService.checkIfCardInAnyDeck(Long.valueOf(user_id), cardToDelete);
         cardService.deleteCustomCardById(Long.parseLong(id));
     }
 
-    @GetMapping(value = "custom/{id}/{name}")
-    public void findCustomCardByName(@PathVariable String id, @PathVariable String name){
-        //TODO implement without collection
+    @GetMapping(value = "custom/search/{id}/{name}")
+    public CustomCardEntity  findCustomCardByName(@PathVariable String id, @PathVariable String name){
+        User user = userService.findUserById(Long.valueOf(id));
+        return user.findCustomCardByName(name);
     }
 
 }
