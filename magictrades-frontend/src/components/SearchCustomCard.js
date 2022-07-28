@@ -10,7 +10,7 @@ const SearchCustomCard = () => {
     console.log(searchName);
     const searchByName = () => {
 
-        axios.get(`http://localhost:8080/custom/${sessionAttributes}/${searchName}`, {params:
+        axios.get(`/custom/${sessionAttributes}/${searchName}`, {params:
                 {sessionId: sessionAttributes,
                     name : searchName}})
             .then(r => setCardData(r.data));
