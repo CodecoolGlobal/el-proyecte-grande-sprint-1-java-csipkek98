@@ -1,22 +1,26 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import CustomCardSearchResult from "./CustomCardSearchResult";
 
 const SearchCustomCard = () => {
     const sessionAttributes = sessionStorage.getItem('id')
     const [searchName, setSearchName] = useState("");
     const [cardData, setCardData] = useState([]);
-    console.log(cardData)
-    console.log(searchName);
     const searchByName = () => {
 
-        axios.get(`http://localhost:8080/custom/${sessionAttributes}/${searchName}`, {params:
+        axios.get(`http://localhost:8080/custom/search/${sessionAttributes}/${searchName}`, {params:
                 {sessionId: sessionAttributes,
                     name : searchName}})
-            .then(r => setCardData(r.data));
+            .then(r => setCardData(r.data) );
+
+            console.log(cardData);
 
     }
         useEffect(() => { searchByName()},[]);
+    const hideSearchCard = () =>{
+        setCardData([]);
+    }
     return (
         <div>
             <label>Search by name</label>
@@ -26,9 +30,10 @@ const SearchCustomCard = () => {
                    autoComplete="off"
             />
             <button className="searchButton" onClick={searchByName}>Search ! </button>
+            <button className="searchButton" onClick={hideSearchCard}>Clear ! </button>
             <div>
                     <div >
-                        <h1>{cardData.name}</h1>
+                        <CustomCardSearchResult {...cardData}/>
                     </div>
 
             </div>
