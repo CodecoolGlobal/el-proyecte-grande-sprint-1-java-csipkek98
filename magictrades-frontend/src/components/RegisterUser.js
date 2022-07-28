@@ -44,51 +44,45 @@ function RegisterUser() {
     return (
         <div className={"userInput"}>
             <h1 id={"h1register"}>Registration page:</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <label className={"userData"}>Username:<br/>
-                            <input id={"userName"} type={"text"} value={userName} onChange={(event) => setName(event.target.value)}/>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label className={"userData"}>Email:<br/>
-                                <input id={"userEmail"} type={"text"} value={userEmail} onChange={(event) => setEmail(event.target.value)}/>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label className={"userData"}>Password:<br/>
-                                <input id={"userPassword"} type={"password"} onChange={(event) => setPassword(event.target.value)}/>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label className={"userData"}>Repeat Password:<br/>
-                                <input id={"userPassword"} type={"password"}/>
-                            </label><br/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input id={"userRegister"} type={"submit"} value={"Register"} onClick={(event) => {
-                                event.preventDefault()
-                                registerUser(event.target.value);
-                            }}/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href={"http://localhost:3000/login"}>Already registered? Click here!</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label className={"userData"}>Username:<br/>
+                                <input id={"userName"} name={"username"} type={"text"} value={userName} onChange={(event) => setName(event.target.value)}/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label className={"userData"}>Email:<br/>
+                                    <input id={"userEmail"} name={"email"} type={"text"} value={userEmail} onChange={(event) => setEmail(event.target.value)}/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label className={"userData"}>Password:<br/>
+                                    <input id={"userPassword"} name={"password"} type={"password"} onChange={(event) => setPassword(event.target.value)}/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id={"userRegister"} type={"submit"} value={"Register"}
+                                       // onClick={(event) => {
+                                       //  event.preventDefault()
+                                       //  registerUser(event.target.value);}}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href={"http://localhost:3000/login"}>Already registered? Click here!</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
     );
     }else{
