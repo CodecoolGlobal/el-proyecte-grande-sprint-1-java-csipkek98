@@ -2,6 +2,7 @@ import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchCustomCard from "./SearchCustomCard";
+import ShowAllDecks from "./ShowAllDecks";
 
 // useCallBack, useMemo, useContext
 
@@ -10,11 +11,12 @@ const CustomCard = () => {
     const [inputPrice, setPrice] = useState("");
     const [inputPic, setPic] = useState("");
     const [getCustomCards, setCustomCardData] = useState([]);
-    // const url = "http://localhost:8080";
-    const URI = `http://localhost:8080/custom`;
-    const [isShown, setIsShown] = useState(false);
     const sessionAttributes = sessionStorage.getItem('id')
-    const handleClick = event => {
+    const urlPost = "http://localhost:8080/custom"
+    const URI = `http://localhost:8080/custom/${sessionAttributes}`;
+    const [isShown, setIsShown] = useState(false);
+
+    const showCards = event => {
         setIsShown(current => !current);
     };
     const fetchCards =  () => {
@@ -23,39 +25,40 @@ const CustomCard = () => {
             console.log(response);
             const data = response.data;
             setCustomCardData(data);
+             if(sessionAttributes=== null){
+                 setCustomCardData([]);
+             }
+
         });
+
     }
     useEffect(() => {
         fetchCards()
     },[]);
     const postData = (e) => {
         e.preventDefault();
-        axios.post(URI,{
+        axios.post(urlPost,{
             name: inputName,
             price: inputPrice, pic: inputPic,
             sessionId: sessionAttributes
         })
             .then((res) => {
                 setCustomCardData([...getCustomCards, res.data])
-                if(sessionAttributes=== null){
-                    alert("You need to register and login to add a custom card ! ")
-                }
+
             });
         if(sessionAttributes=== null){
             alert("You need to register and login to add a custom card ! ")
         }
     }
-    const removeUser = async id => {
+    const removeUser = async (id) =>  {
         try {
-            const res = await axios.delete(`${URI}/${id}`)
+            const url = `http://localhost:8080/custom/user/${sessionAttributes}/card_id/${id}`;
+            const res = await axios.delete(url)
             await fetchCards()
         } catch (error) {
             alert(error)
         }
     }
-    useEffect(() => {
-         fetchCards()
-    }, [])
 
     return (
         <div>
@@ -83,7 +86,7 @@ const CustomCard = () => {
             <br/>
             <SearchCustomCard/>
             <div>
-                <button className="searchButton" onClick={handleClick}>Show all custom card</button>
+                <button className="searchButton" onClick={showCards}>Show all custom card</button>
                 {isShown && <div>
                     {
                         getCustomCards.map(cardObj => (
@@ -92,12 +95,16 @@ const CustomCard = () => {
                                     <div className="container">
                                         <p className="cardPrice">Price of the card:  {cardObj.price}</p>
                                         < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
-                                        <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                        <button  className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
                                     </div>
                                 </div>
                             )
                         )}
                 </div>}
+                <div>
+                <ShowAllDecks />
+            </div>
+
             </div>
         </div>
     );

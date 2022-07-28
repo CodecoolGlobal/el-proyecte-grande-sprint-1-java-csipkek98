@@ -1,10 +1,13 @@
 package com.WizardsOfTheCoast.magic.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DeckEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,34 +32,15 @@ public class DeckEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private User user;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<CustomCardEntity> deckCards = new ArrayList<>();
-
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<CustomCardEntity> cards = new ArrayList<>();
 
     public void addCard(CustomCardEntity card) {
-
-        deckCards.add(card);
-        card.setDeck(this);
-    }
-
-    public void addCard( CustomCardEntity card, boolean set) {
-        if (card != null) {
-            if(deckCards.contains(card)) {
-                deckCards.set(deckCards.indexOf(card), card);
-            }
-            else {
-                deckCards.add(card);
-            }
-            if (set) {
-                card.setDeck(this, false);
-            }
-        }
+        cards.add(card);
     }
 
     public void removeCard(CustomCardEntity card) {
-        deckCards.remove(card);
-        card.setUser(null);
+        cards.remove(card);
     }
     public boolean equals(Object object) {
         if (object == this)
@@ -74,5 +59,9 @@ public class DeckEntity {
         if (user != null && add) {
             user.addDeck(this, false);
         }
+    }
+
+    public void deleteCard(Long cardId){
+        cards.removeIf(card -> card.getId().equals(cardId));
     }
 }
