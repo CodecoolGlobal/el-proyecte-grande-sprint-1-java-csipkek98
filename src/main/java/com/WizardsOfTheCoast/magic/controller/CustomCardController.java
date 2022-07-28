@@ -19,7 +19,7 @@ import java.util.Map;
 @CrossOrigin(origins = {"*"},
         methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
         , allowedHeaders = "*")
-@RestController
+@RestController("/api")
 public class CustomCardController {
     private customCardService cardService;
     private CollectionService collectionService;
