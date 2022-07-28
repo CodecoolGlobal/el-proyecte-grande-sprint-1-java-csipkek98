@@ -183,7 +183,7 @@ div>h1, .cardPrice{
 .productsContainer>div{
   margin-bottom: 50px;
 }
-.deleteCardButton{
+.deleteCardButton, .customCardSearchBar{
   display: grid;
   justify-content: center;
 }
