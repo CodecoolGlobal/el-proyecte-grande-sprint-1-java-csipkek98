@@ -9,7 +9,7 @@ const SearchResult = (props) => {
                             <h1>{cardObj.name}</h1>
                             <div >
                                 <p className="cardPrice">Price of the card:  {cardObj.price}</p>
-                                < img src={cardObj.imageUrl} alt="new" className="products img" />
+                                < img src={cardObj.imageUrl} alt="new" className="products-img" />
                             </div>
                         </div>
                     )
