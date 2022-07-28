@@ -6,7 +6,7 @@ import React from "react";
 
 
 function RegisterUser() {
-    const url = `http://localhost:8080/`;
+    const url = `/`;
     const [userName, setName] = useState("");
     const [userEmail, setEmail] = useState("");
     const [userPassword, setPassword] = useState("");
