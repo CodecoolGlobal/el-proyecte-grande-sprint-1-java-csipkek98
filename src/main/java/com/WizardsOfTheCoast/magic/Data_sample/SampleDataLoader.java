@@ -8,6 +8,7 @@ import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import com.WizardsOfTheCoast.magic.entity.DeckEntity;
 import com.WizardsOfTheCoast.magic.entity.MagicWallet;
 import com.WizardsOfTheCoast.magic.entity.User;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,7 @@ public class SampleDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int amountOfCards = 100;
+        int generatedCardNumber = 20;
         String [] randomNames = {"SpookySkeleton", "BoogeyMan", "BigBadWolf", "ScaryGhost", "TerrificTroll"};
         String [] randomPictures = {"https://www.beholder.hu/pic/galeria/0497.jpg",
                 "https://www.beholder.hu/pic/galeria/0465.jpg",
@@ -54,24 +55,37 @@ public class SampleDataLoader implements CommandLineRunner {
 
         MagicWallet newWallet = new MagicWallet();
         DeckEntity deck = new DeckEntity();
+        DeckEntity deck2 = new DeckEntity();
+        DeckEntity deck3 = new DeckEntity();
         user.addDeck(deck);
         deck.setUser(user);
         userRepository.save(user);
         deckRepository.save(deck);
+        user.addDeck(deck2);
+        deck.setUser(user);
+
+        deckRepository.save(deck2);
+        user.addDeck(deck3);
+        deck.setUser(user);
+
+        deckRepository.save(deck3);
 
         // Cascade type  and keep attention when to save
 
-        for(int i = 0; i < amountOfCards; i++){
+        for(int i = 0; i < generatedCardNumber; i++){
+
             CustomCardEntity testCard = CustomCardEntity.builder()
                     .name(randomNames[rand.nextInt((4 - 1) + 1) + 1] + i)
                     .imageUrl(randomPictures[rand.nextInt((4 - 1) + 1) + 1])
                     .price(100)
                     .build();
+
             user.addCard(testCard);
             testCard.setUser(user);
             deck.addCard(testCard);
-            testCard.setDeck(deck);
-            userRepository.save(user);
+
         }
+
+        deckRepository.save(deck);
     }
 }
