@@ -59,24 +59,25 @@ const CustomCard = () => {
 
     return (
         <div>
+            <br/><br/>
             <label>Card Name</label>
             <input className="searchField" type="text" id="inputName" name="name"
                    value={inputName}
                    onChange={(event) => setName(event.target.value)}
                    autoComplete="off"
-            />
+            /><br/><br/>
             <label>Price</label>
             <input className="searchField" type="text" id="inputPrice" name="price"
                    value={inputPrice}
                    onChange={(event) => setPrice(event.target.value)}
                    autoComplete="off"
-            />
+            /><br/><br/>
             <label>Pic</label>
             <input className="searchField" type="text" id="inputPrice" name="pic"
                    value={inputPic}
                    onChange={(event) => setPic(event.target.value)}
                    autoComplete="off"
-            />
+            /><br/><br/>
             <button className="searchButton" onClick={postData}>Add custom card ! </button>
             <br/>
             <br/>
@@ -90,9 +91,14 @@ const CustomCard = () => {
                                 <div key={cardObj.id}>
                                     <h1>{cardObj.name}</h1>
                                     <div className="container">
-                                        <p className="cardPrice">Price of the card:  {cardObj.price}</p>
-                                        < img src={cardObj.imageUrl} alt="new" className="cardImage"/>
-                                        <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                        <p className="card-price">Price of the card:  {cardObj.price}</p>
+                                        <div className={"card-customImageUrl"}>
+                                            <img src={cardObj.imageUrl} alt="new"/>
+                                        </div>
+                                        <br/>
+                                        <div className={"deleteCardButton"}>
+                                            <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                        </div>
                                     </div>
                                 </div>
                             )
