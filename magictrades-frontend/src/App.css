@@ -135,6 +135,13 @@ td{
   justify-content: center;
   margin-left: 150px;
 }
+.card-customImageUrl{
+  height: 50%;
+  width: auto;
+  display: grid;
+  justify-content: center;
+  margin-left: 150px;
+}
 * {
   box-sizing: border-box;
 }
@@ -176,5 +183,10 @@ div>h1, .cardPrice{
 .productsContainer>div{
   margin-bottom: 50px;
 }
+.deleteCardButton{
+  display: grid;
+  justify-content: center;
+}
+
 
 
