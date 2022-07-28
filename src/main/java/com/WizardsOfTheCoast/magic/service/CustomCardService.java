@@ -7,19 +7,26 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class customCardService {
+public class CustomCardService {
 
     private final CustomCardRepository customCardRepository;
 
 
     @Autowired
-    public customCardService(@Qualifier("CustomCardRepository")  CustomCardRepository customCardRepository)
+    public CustomCardService(@Qualifier("CustomCardRepository")  CustomCardRepository customCardRepository)
     {
         this.customCardRepository = customCardRepository;
 
+    }
+
+    public void saveCard(CustomCardEntity card){
+        customCardRepository.save(card);
+    }
+
+    public CustomCardEntity findCardByName(String name){
+        return customCardRepository.findCardByName(name);
     }
 
     public List<CustomCardEntity> getAllCustomCard(){
@@ -45,6 +52,10 @@ public class customCardService {
             }
         }
         return null;
+    }
+
+    public CustomCardEntity findCardById(Long id){
+        return customCardRepository.findById(id).get();
     }
 
 }

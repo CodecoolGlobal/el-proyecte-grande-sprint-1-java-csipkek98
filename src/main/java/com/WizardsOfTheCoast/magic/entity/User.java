@@ -2,18 +2,22 @@ package com.WizardsOfTheCoast.magic.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name ="User")
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
     @Id
@@ -120,5 +124,24 @@ public class User {
                 ", cards=" + cards +
                 ", decks=" + decks +
                 '}';
+    }
+
+
+    public CustomCardEntity findCustomCardByName(String name) {
+        for (CustomCardEntity card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public DeckEntity findDeckById(Long id){
+        for (DeckEntity deck : decks) {
+            if(Objects.equals(deck.getId(), id)){
+                return deck;
+            }
+        }
+        return null;
     }
 }
