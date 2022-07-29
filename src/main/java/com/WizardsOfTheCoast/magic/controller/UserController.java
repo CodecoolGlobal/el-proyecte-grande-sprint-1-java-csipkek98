@@ -1,7 +1,6 @@
 package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.entity.User;
-import com.WizardsOfTheCoast.magic.service.CollectionService;
 import com.WizardsOfTheCoast.magic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +16,11 @@ public class UserController {
 
 
     private UserService userService;
-    private CollectionService collectionService;
+
     @Autowired
-    public UserController(UserService userService, CollectionService collectionService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.collectionService = collectionService;
+
     }
 
     @PostMapping("/usercheck")
