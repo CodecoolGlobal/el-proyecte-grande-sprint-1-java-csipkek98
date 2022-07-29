@@ -1,15 +1,11 @@
 package com.WizardsOfTheCoast.magic.controller;
 
-import com.WizardsOfTheCoast.magic.Data_sample.CustomCardCreator;
-import com.WizardsOfTheCoast.magic.entity.CollectionEntity;
 import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
-import com.WizardsOfTheCoast.magic.service.CollectionService;
-import com.WizardsOfTheCoast.magic.service.customCardService;
+import com.WizardsOfTheCoast.magic.entity.User;
+import com.WizardsOfTheCoast.magic.service.UserService;
+import com.WizardsOfTheCoast.magic.service.CustomCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,73 +16,56 @@ import java.util.Map;
         , allowedHeaders = "*")
 @RestController
 public class CustomCardController {
-    private customCardService cardService;
-    private CollectionService collectionService;
-
-    public CustomCardController(CollectionService collectionService) {
-        this.collectionService = collectionService;
-    }
+    private CustomCardService cardService;
+    private UserService userService;
 
     @Autowired
-    public void setService(customCardService cardService) {
+    public CustomCardController(CustomCardService cardService, UserService userService) {
         this.cardService = cardService;
+        this.userService = userService;
     }
+
 
     @GetMapping(value = "/")
     public List<CustomCardEntity> Greetings(){
-//        initCards();
-//        for(CustomCardEntity card: cardService.getAllCustomCard()){
-//            System.out.println(card.getName() + "init");
-//        }
+
         return cardService.getAllCustomCard();
     }
 
-    @GetMapping(value = "/custom")
-    public List<CustomCardEntity> getClients() {
-
-        return cardService.getAllCustomCard();
+    @GetMapping(value = "/custom/{id}")
+    public List<CustomCardEntity> getClients(@PathVariable String id) {
+        System.out.println(id);
+        User user = userService.findUserById(Long.valueOf(id));
+        return userService.getAllUserCards(Long.valueOf(id));
     }
 
     @PostMapping(value = "/custom")
     public CustomCardEntity addCustomCard(@RequestBody Map<String, Object> payLoad) {
-        long l=Long.parseLong((String) payLoad.get("sessionId"));
-        CollectionEntity collection = collectionService.getCollection(l);
         CustomCardEntity customCard = CustomCardEntity.builder()
                 .name((String)payLoad.get("name"))
                 .imageUrl((String)payLoad.get("pic"))
                 .price(Integer.parseInt((String)payLoad.get("price")))
-                .collection(collection)
         .build();
-        customCard.setCollection(collection);
+        long l=Long.parseLong((String) payLoad.get("sessionId"));
+        User user = userService.findUserById(l);
+        user.addCard(customCard);
+        customCard.setUser(user);
         cardService.addCard(customCard);
         return customCard;
     }
 
-    @PostMapping(value = "/custom/create")
-    public CollectionEntity addCollection(){
-        List<CustomCardEntity> empty = new ArrayList<>();
-        CollectionEntity collection = CollectionEntity.builder()
-                .cards(empty)
-                .build();
-        collectionService.saveCollection(collection);
-        return collection;
-    }
 
-    @DeleteMapping(value = "/custom/{id}")
-    public void deleteCustomCard(@PathVariable String id){
+    @DeleteMapping(value = "/custom/user/{user_id}/card_id/{id}")
+    public void deleteCustomCard(@PathVariable String id, @PathVariable String user_id){
+        CustomCardEntity cardToDelete = cardService.findCardById(Long.valueOf(id));
+        userService.checkIfCardInAnyDeck(Long.valueOf(user_id), cardToDelete);
         cardService.deleteCustomCardById(Long.parseLong(id));
     }
 
-    @GetMapping(value = "custom/{id}/{name}")
-    public CustomCardEntity findCustomCardByName(@PathVariable String id, @PathVariable String name){
-        CollectionEntity collection = collectionService.getCollection(Long.valueOf(id));
-        return cardService.findCustomCardFromCollectionByName(collection.getCards(), name);
+    @GetMapping(value = "custom/search/{id}/{name}")
+    public CustomCardEntity  findCustomCardByName(@PathVariable String id, @PathVariable String name){
+        User user = userService.findUserById(Long.valueOf(id));
+        return user.findCustomCardByName(name);
     }
 
-    public void initCards(){
-        List<CustomCardEntity> initCards = CustomCardCreator.initialize();
-        for (CustomCardEntity initCard : initCards) {
-            cardService.addCard(initCard);
-        }
-    }
 }

@@ -30,7 +30,7 @@ public class FilterController {
         System.out.println(query);
         String[] parameters = query.split("[&=]");
         List<String> parameterData = new ArrayList<>();
-        for (int i = 0; i < parameters.length; i = i + 3) {
+        for (int i = 0; i < parameters.length; i = i + 2) {
             System.out.println(parameters[i] + " " + parameters[i]);
             parameterData.add(parameters[i] + "=" + parameters[i + 1]);
         }

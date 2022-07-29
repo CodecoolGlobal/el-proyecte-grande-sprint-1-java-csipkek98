@@ -6,13 +6,15 @@ h1{
   color:white;
 }
 img{
-  width: 70%;
   height: auto;
   border-radius: 25px;
-  text-align: center;
   border-width: 20px;
   border-style: groove;
   Border-color: gray;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 /*NAVBAR*/
@@ -169,10 +171,10 @@ td>a, td>label, div>label{
   color: white;
 }
 
-div>h1, .cardPrice{
-  display: grid;
-  justify-content: center;
-}
+/*div>h1, .cardPrice{*/
+/*  display: grid;*/
+/*  justify-content: center;*/
+/*}*/
 .products-img{
   margin-left: 80px;
 }
