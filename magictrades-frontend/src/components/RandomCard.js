@@ -29,7 +29,9 @@ const RandomCards = () => {
         // Create new component inside the map
         // Mapping can be replaced, card component
 
-        <div className="productsContainer" id={"card-details"}>
+        <div
+            // className="productsContainer"
+             id={"card-details"}>
             {Object.keys(cardData).map((key, index) => {
                 if(cardData[key] !== null){
                     if(key === "name"){
@@ -52,7 +54,7 @@ const RandomCards = () => {
                         )}
                     return (
                         <div id={"card-" + key}>
-                            <p className="cardPrice">{cardData[key]}</p>
+                            <p className="cardPrice">Price: {cardData[key]}</p>
                         </div>
                     );
                 }

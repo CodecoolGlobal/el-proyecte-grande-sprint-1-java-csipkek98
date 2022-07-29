@@ -22,7 +22,7 @@ const SearchCustomCard = () => {
         setCardData([]);
     }
     return (
-        <div>
+        <div className={"customCardSearchBar"}>
             <label>Search by name</label>
             <input className="searchField" type="text" id="searchName" name="Search By Name"
                    value={searchName}

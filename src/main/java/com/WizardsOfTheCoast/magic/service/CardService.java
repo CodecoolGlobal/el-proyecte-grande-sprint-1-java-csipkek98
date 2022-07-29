@@ -41,7 +41,7 @@ public class CardService {
                 cardsOnPageNumber++;
 
             }
-            if(cardsOnPageNumber == 10){
+            if(cardsOnPageNumber == 12){
                 break;
             }
         }
