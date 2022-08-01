@@ -1,8 +1,9 @@
 import CustomCard from "./CustomCard";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Navigate, useNavigate} from "react-router-dom";
 import React from "react";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 
 function RegisterUser() {
@@ -11,34 +12,63 @@ function RegisterUser() {
     const [userEmail, setEmail] = useState("");
     const [userPassword, setPassword] = useState("");
     let navigate = useNavigate();
-    let isUserExist = false;
+    const [isUserExist, setIsUserExist] = useState(null);
+    const isInitialMount = useRef(true);
+    let registerData = new FormData();
+    registerData.append('username', `${userName}`);
+    registerData.append('email', `${userEmail}`);
+    registerData.append('password', `${userPassword}`)
+    // let userCheckData = new FormData();
+    // userCheckData.append('username', `${userName}`);
+    // userCheckData.append('email', `${userEmail}`);
+
 
     let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
 
-    async function registerUser() {
+    function registerUser() {
         // const url = `${process.env.REACT_APP_HOST_URL}/register`;
-        await isUserAlreadyExist(url)
-        if (!isUserExist && regex.test(userEmail)) {
-            await register(url)
-            navigate("../login");
-            alert("Account successfully created!")
-        }else if(!regex.test(userEmail)){
-            alert("Wrong email format, please try again!")
-        }else{
-            alert("User already exist, please try again!")
-        }
+        isUserAlreadyExist(url)
+        // setRegisterTryCounter(registerTryCounter+1)
     }
 
-    async function isUserAlreadyExist(url){
-        await axios.post(url+"usercheck", {username: userName, email: userEmail})
+    useEffect(()=>{
+        if(isInitialMount.current){
+            isInitialMount.current = false;
+        }else{
+            if (!isUserExist && regex.test(userEmail) && isUserExist !== null) {
+                console.log("Right here to check register!")
+                console.log("User is existing?", isUserExist)
+                console.log("right email?", regex.test(userEmail))
+                register(url)
+            }else if(userEmail.length !== 0 && !regex.test(userEmail)){
+                alert("Wrong email format, please try again!")
+            }else if(isUserExist){
+                alert("User already exist, please try again!")
+            }
+            console.log("useEffect Check!")
+            setIsUserExist(null)
+        }
+    },[isUserExist])
+
+    function isUserAlreadyExist(url){
+        axios.post(url+"api/usercheck", {username: userName, email: userEmail})
             .then((response) => {
-                isUserExist = response.data.length>0;
-                return response.data.length>0;
+                setIsUserExist(response.data);
             });
     }
 
-    const register = async (url) => {
-        await axios.post(url+"register",{username: userName, email: userEmail, password: userPassword});
+    const register = (url) => {
+        console.log("User not existing, sending data")
+        axios({
+            method: "post",
+            url: url+"api/user/save",
+            data: {username: userName, email: userEmail, password: userPassword},
+        }).then(() => {
+                navigate("../login");
+                alert("Account successfully created!")
+        }).catch((message) => {
+                alert(message)
+        });
     }
     if(sessionStorage.getItem("id") === null){
     return (
@@ -70,9 +100,9 @@ function RegisterUser() {
                         <tr>
                             <td>
                                 <input id={"userRegister"} type={"submit"} value={"Register"}
-                                       // onClick={(event) => {
-                                       //  event.preventDefault()
-                                       //  registerUser(event.target.value);}}
+                                       onClick={(event) => {
+                                        event.preventDefault()
+                                        registerUser(event.target.value);}}
                                 />
                             </td>
                         </tr>
