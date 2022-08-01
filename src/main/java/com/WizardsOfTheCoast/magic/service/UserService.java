@@ -66,9 +66,10 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public List<User> checkIfUserIsAlreadyExist(String name, String email){
+    public boolean checkIfUserIsAlreadyExist(String name, String email){
         log.info("Checking if user is existing by Name: {} or Email: {}", name, email);
-        return userRepository.findByUsernameOrEmail(name,email);
+        List<User> userList = userRepository.findByUsernameOrEmail(name,email);
+        return userList.size() > 0;
     }
 
     public void createNewUser(User user){
@@ -77,27 +78,6 @@ public class UserService implements UserDetailsService {
 //        User savedUserWithWallet = createNewWalletForUser(savedUser);
 //        createNewCollectionForUser(savedUserWithWallet);
     }
-
-//    private User createNewWalletForUser(User user){
-//        log.info("Create new wallet for {}", user.getUsername());
-//        MagicWallet newWallet = new MagicWallet();
-//        newWallet.setUser(user);
-//        MagicWallet userWallet = magicWalletRepository.save(newWallet);
-//        user.setCurrency(userWallet);
-//        return userRepository.save(user);
-//    }
-//
-//    private void createNewCollectionForUser(User user){
-//        log.info("Create new collect for {}", user.getUsername());
-//        List<CustomCardEntity> empty = new ArrayList<>();
-//        CollectionEntity collection = CollectionEntity.builder()
-//                .cards(empty)
-//                .build();
-//        collection.setUser(user);
-//        CollectionEntity collectionWithUser = collectionRepository.save(collection);
-//        user.setCollectionEntity(collectionWithUser);
-//        userRepository.save(user);
-//    }
 
     public User getUser(String username){
         return userRepository.findByUsername(username);
