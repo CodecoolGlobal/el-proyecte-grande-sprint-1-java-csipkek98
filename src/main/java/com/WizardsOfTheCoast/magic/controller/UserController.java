@@ -44,8 +44,8 @@ public class UserController {
         this.collectionService = collectionService;
     }
 
-    @PostMapping("/usercheck")
-    public List<User> getUsersWithName(@RequestBody Map<String, String> payload) {
+    @PostMapping("/api/usercheck")
+    public boolean getUsersWithName(@RequestBody Map<String, String> payload) {
         System.out.println(payload);
         return userService.checkIfUserIsAlreadyExist(payload.get("username"), payload.get("email"));
     }
