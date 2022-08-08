@@ -50,7 +50,7 @@ public class CustomCardController {
         User user = userService.findUserById(l);
         user.addCard(customCard);
         customCard.setUser(user);
-        cardService.addCard(customCard);
+        cardService.saveCard(customCard);
         return customCard;
     }
 
