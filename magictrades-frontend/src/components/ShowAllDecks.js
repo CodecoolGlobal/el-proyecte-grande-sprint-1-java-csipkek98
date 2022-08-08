@@ -44,14 +44,6 @@ const ShowAllDecks = () => {
         });
     }
 
-    const showAllDecks = () =>{
-        const deckCardsUrl = `http://localhost:8080/decks/${sessionAttributes}`
-        axios.get(deckCardsUrl
-        ).then((response) => {
-            const data = response.data;
-            setCustomDecks(data);
-        });
-    }
     const hideCards = () => {
         setCustomDeckCards([]);
     }
