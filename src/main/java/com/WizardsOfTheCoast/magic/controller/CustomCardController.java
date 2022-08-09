@@ -78,10 +78,10 @@ public class CustomCardController {
         cardService.deleteCustomCardById(Long.parseLong(id));
     }
 
-    @GetMapping(value = "custom/{id}/{name}")
-    public CustomCardEntity findCustomCardByName(@PathVariable String id, @PathVariable String name){
-        CollectionEntity collection = collectionService.getCollection(Long.valueOf(id));
-        return cardService.findCustomCardFromCollectionByName(collection.getCards(), name);
+    @GetMapping(value = "/custom/{username}/{searchName}")
+    public CustomCardEntity findCustomCardByName(@PathVariable String username, @PathVariable String searchName){
+        CollectionEntity collection = collectionService.getCollectionByName(username);
+        return cardService.findCustomCardFromCollectionByName(collection.getCards(), searchName);
     }
 
     public void initCards(){
