@@ -2,7 +2,6 @@ package com.WizardsOfTheCoast.magic.controller;
 
 import com.WizardsOfTheCoast.magic.entity.Role;
 import com.WizardsOfTheCoast.magic.entity.User;
-import com.WizardsOfTheCoast.magic.service.CollectionService;
 import com.WizardsOfTheCoast.magic.service.UserService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -36,12 +35,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class UserController {
     private final UserService userService;
-    private final CollectionService collectionService;
 
     @Autowired
-    public UserController(UserService userService, CollectionService collectionService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.collectionService = collectionService;
+
     }
 
     @PostMapping("/api/usercheck")
