@@ -85,7 +85,7 @@ public class UserService {
         return user.findDeckById(id);
     }
 
-    public void checkIfCardInAnyDeck(Long id, CustomCardEntity cardToDelete){
+    public DeckEntity checkIfCardInAnyDeck(Long id, CustomCardEntity cardToDelete){
         User user = userRepository.findById(id).get();
         List<DeckEntity> decks = user.getDecks();
         DeckEntity destinationDeck = null;
@@ -98,8 +98,8 @@ public class UserService {
             }
             }
         assert destinationDeck != null;
-        destinationDeck.removeCard(cardToDelete);
-        }
+        return destinationDeck;
+    }
 
         public void saveUser(User user){
             userRepository.save(user);
