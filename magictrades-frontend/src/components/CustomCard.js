@@ -59,10 +59,10 @@ const CustomCard = () => {
         if (isFirstRender.current) {
             if(loading){
                 isAuthenticated()
+                fetchCards()
             }
         isFirstRender.current = false;
         }
-        // fetchCards()
     }, [loading])
 
     function isAuthenticated() {
