@@ -50,8 +50,8 @@ public class CustomCardController {
 
     @PostMapping(value = "/custom")
     public CustomCardEntity addCustomCard(@RequestBody Map<String, Object> payLoad) {
-        long l=Long.parseLong((String) payLoad.get("sessionId"));
-        CollectionEntity collection = collectionService.getCollection(l);
+        String username = (String)payLoad.get("username");
+        CollectionEntity collection = collectionService.getCollectionByName(username);
         CustomCardEntity customCard = CustomCardEntity.builder()
                 .name((String)payLoad.get("name"))
                 .imageUrl((String)payLoad.get("pic"))
