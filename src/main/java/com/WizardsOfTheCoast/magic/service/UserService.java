@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
 public class UserService implements UserDetailsService {
