@@ -104,4 +104,13 @@ public class UserService {
         public void saveUser(User user){
             userRepository.save(user);
         }
+
+        public CustomCardEntity findCustomCardByNameFromUser(String name, User user){
+            for (CustomCardEntity card : user.getCards()) {
+                if(card.getName().equals(name)){
+                    return card;
+                }
+            }
+            return null;
+        }
 }
