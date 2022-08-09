@@ -1,11 +1,13 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import CustomCardSearchResult from "./CustomCardSearchResult";
 
 const SearchCustomCard = () => {
     const sessionAttributes = sessionStorage.getItem('id')
     const [searchName, setSearchName] = useState("");
     const [cardData, setCardData] = useState([]);
+
     console.log(parseJwt(localStorage.getItem("jwt")).sub)
 
     function parseJwt (token) {
@@ -23,12 +25,17 @@ const SearchCustomCard = () => {
         axios.get(`/custom/${sessionAttributes}/${searchName}`, {params:
                 {sessionId: sessionAttributes,
                     name : searchName}})
-            .then(r => setCardData(r.data));
+            .then(r => setCardData(r.data) );
+
+        console.log(cardData);
 
     }
-        useEffect(() => { searchByName()},[]);
+    useEffect(() => { searchByName()},[]);
+    const hideSearchCard = () =>{
+        setCardData([]);
+    }
     return (
-        <div>
+        <div className={"customCardSearchBar"}>
             <label>Search by name</label>
             <input className="searchField" type="text" id="searchName" name="Search By Name"
                    value={searchName}
@@ -36,10 +43,11 @@ const SearchCustomCard = () => {
                    autoComplete="off"
             />
             <button className="searchButton" onClick={searchByName}>Search ! </button>
+            <button className="searchButton" onClick={hideSearchCard}>Clear ! </button>
             <div>
-                    <div >
-                        <h1>{cardData.name}</h1>
-                    </div>
+                <div >
+                    <CustomCardSearchResult {...cardData}/>
+                </div>
 
             </div>
         </div>
