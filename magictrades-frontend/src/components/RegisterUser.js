@@ -64,57 +64,57 @@ function RegisterUser() {
             url: url+"api/user/save",
             data: {username: userName, email: userEmail, password: userPassword},
         }).then(() => {
-                navigate("../login");
-                alert("Account successfully created!")
+            navigate("../login");
+            alert("Account successfully created!")
         }).catch((message) => {
-                alert(message)
+            alert(message)
         });
     }
     if(sessionStorage.getItem("id") === null){
-    return (
-        <div className={"userInput"}>
-            <h1 id={"h1register"}>Registration page:</h1>
+        return (
+            <div className={"userInput"}>
+                <h1 id={"h1register"}>Registration page:</h1>
                 <table>
                     <tbody>
-                        <tr>
-                            <td>
-                                <label className={"userData"}>Username:<br/>
+                    <tr>
+                        <td>
+                            <label className={"userData"}>Username:<br/>
                                 <input id={"userName"} name={"username"} type={"text"} value={userName} onChange={(event) => setName(event.target.value)}/>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label className={"userData"}>Email:<br/>
-                                    <input id={"userEmail"} name={"email"} type={"text"} value={userEmail} onChange={(event) => setEmail(event.target.value)}/>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label className={"userData"}>Password:<br/>
-                                    <input id={"userPassword"} name={"password"} type={"password"} onChange={(event) => setPassword(event.target.value)}/>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input id={"userRegister"} type={"submit"} value={"Register"}
-                                       onClick={(event) => {
-                                        event.preventDefault()
-                                        registerUser(event.target.value);}}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href={"http://localhost:3000/login"}>Already registered? Click here!</a>
-                            </td>
-                        </tr>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label className={"userData"}>Email:<br/>
+                                <input id={"userEmail"} name={"email"} type={"text"} value={userEmail} onChange={(event) => setEmail(event.target.value)}/>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label className={"userData"}>Password:<br/>
+                                <input id={"userPassword"} name={"password"} type={"password"} onChange={(event) => setPassword(event.target.value)}/>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id={"userRegister"} type={"submit"} value={"Register"}
+                                   onClick={(event) => {
+                                       event.preventDefault()
+                                       registerUser(event.target.value);}}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href={"http://localhost:3000/login"}>Already registered? Click here!</a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-        </div>
-    );
+            </div>
+        );
     }else{
         return <Navigate to='/'  />
     }
