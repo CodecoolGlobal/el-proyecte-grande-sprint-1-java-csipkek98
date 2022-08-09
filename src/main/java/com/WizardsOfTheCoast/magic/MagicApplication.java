@@ -1,6 +1,8 @@
 package com.WizardsOfTheCoast.magic;
+
 import com.WizardsOfTheCoast.magic.entity.*;
 import com.WizardsOfTheCoast.magic.service.UserService;
+import com.WizardsOfTheCoast.magic.Data_sample.SampleDataLoader;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,18 +17,6 @@ import java.util.ArrayList;
 
 @SpringBootApplication
 public class MagicApplication {
-
-	@Bean
-	public DataSource getDataSource()
-	{
-		Dotenv dotenv = Dotenv.load();
-		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-		dataSourceBuilder.driverClassName(dotenv.get("DB_DRIVER"));
-		dataSourceBuilder.url(dotenv.get("DB_URL"));
-       	dataSourceBuilder.username(dotenv.get("DB_USERNAME"));
-	   	dataSourceBuilder.password(dotenv.get("DB_PASSWORD"));
-		return dataSourceBuilder.build();
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(MagicApplication.class, args);
 	}
@@ -44,11 +34,9 @@ public class MagicApplication {
 			userservice.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
 			userservice.createNewUser(new User(null,"Christian Lace","chris",
-					"asd@asd.com","asd125",null,
-					new ArrayList<>(), null, null));
+					"asd@asd.com","asd125",null, null, null,new ArrayList<>()));
 
 			userservice.addRoleToUser("chris", "ROLE_SUPER_ADMIN");
 		};
 	}
-
 }
