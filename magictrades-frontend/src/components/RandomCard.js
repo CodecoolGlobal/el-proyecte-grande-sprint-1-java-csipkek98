@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const url = `/randomcard`;
+const url = `/api/randomcard`;
 const fetchCards = (abortController) => {
     return axios.get(url, {signal: abortController.signal})
 }
