@@ -25,10 +25,6 @@ const RandomCards = () => {
         }
     },[]);
     return (
-
-        // Create new component inside the map
-        // Mapping can be replaced, card component
-
         <div
             // className="productsContainer"
              id={"card-details"}>
