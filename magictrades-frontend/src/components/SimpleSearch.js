@@ -7,10 +7,9 @@ import {useNavigate} from "react-router-dom";
 const SimpleSearch = () => {
     const [inputName, setName] = useState('');
     const [getCards, setGetCardData] = useState([]);
-    const url = `/search/${inputName}`;
+    const url = `/api/search/${inputName}`;
     let navigate = useNavigate();
     const routeChange = () =>{
-    
         let path = "/search";
 
         navigate(path);
