@@ -10,4 +10,5 @@ import java.util.List;
 public interface CustomCardRepository extends JpaRepository<CustomCardEntity, Long> {
 
     List<CustomCardEntity>findAllById(Long collectionId);
+    CustomCardEntity findCardByName(String name);
 }
