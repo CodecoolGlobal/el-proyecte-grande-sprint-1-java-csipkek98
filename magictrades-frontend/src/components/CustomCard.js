@@ -22,8 +22,12 @@ const CustomCard = () => {
         setIsShown(current => !current);
     };
     const fetchCards = () => {
-        axios.get(URI
-        ).then((response) => {
+        const jwtToken = {
+            'Authorization': `Bearer ${btoa(localStorage.getItem("jwt"))}`,
+        };
+        axios.get("/api/custom", {
+            headers: jwtToken
+        }).then((response) => {
             console.log(response);
             const data = response.data;
             setCustomCardData(data);
