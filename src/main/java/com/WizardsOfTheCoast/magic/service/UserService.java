@@ -45,7 +45,6 @@ public class UserService implements UserDetailsService {
         this.roleRepository = roleRepository;
     }
 
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -103,7 +102,6 @@ public class UserService implements UserDetailsService {
 
     public User saveUser(User user){
         log.info("User '{}' saved",user.getUsername());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
