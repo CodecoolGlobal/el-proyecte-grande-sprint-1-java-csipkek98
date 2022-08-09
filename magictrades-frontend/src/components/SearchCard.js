@@ -7,7 +7,7 @@ const SearchCard = () => {
     const [inputRarity, setRarity] = useState('');
     const [getCards, setGetCardData] = useState([]);
     // const url = `${process.env.REACT_APP_HOST_URL}/search${inputName}`;
-    let url = `http://localhost:8080/card/filter?`;
+    let url = `/card/filter?`;
     const fetchCards = async () => {
         await axios.get(url).then((response) => {
             console.log(response);

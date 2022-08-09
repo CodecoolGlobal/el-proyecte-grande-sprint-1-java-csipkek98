@@ -7,14 +7,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name ="User")
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -24,6 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+    private String name;
     private String username;
     private String email;
     private String password;
@@ -38,7 +40,8 @@ public class User {
     @OneToMany(
             cascade = CascadeType.ALL, mappedBy = "user")
     private List<DeckEntity> decks = new ArrayList<>();
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     public void addCard(CustomCardEntity card) {
         cards.add(card);

@@ -8,7 +8,7 @@ import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
 import com.WizardsOfTheCoast.magic.entity.DeckEntity;
 import com.WizardsOfTheCoast.magic.entity.MagicWallet;
 import com.WizardsOfTheCoast.magic.entity.User;
-import lombok.NoArgsConstructor;
+import com.WizardsOfTheCoast.magic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,14 +24,16 @@ public class SampleDataLoader implements CommandLineRunner {
     private UserRepository userRepository;
     private MagicWalletRepository magicWalletRepository;
     private DeckRepository deckRepository;
+    private UserService userService;
 
     @Autowired
     public SampleDataLoader(CustomCardRepository customCardRepository,
-                            UserRepository userRepository, MagicWalletRepository magicWalletRepository, DeckRepository deckRepository) {
+                            UserRepository userRepository, MagicWalletRepository magicWalletRepository, DeckRepository deckRepository, UserService userService) {
         this.customCardRepository = customCardRepository;
         this.userRepository = userRepository;
         this.magicWalletRepository = magicWalletRepository;
         this.deckRepository = deckRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 .password("1234")
                 .cards(cards)
                 .decks(decks)
+                .roles(new ArrayList<>())
                 .build();
 
         MagicWallet newWallet = new MagicWallet();
@@ -59,7 +62,7 @@ public class SampleDataLoader implements CommandLineRunner {
         DeckEntity deck3 = new DeckEntity();
         user.addDeck(deck);
         deck.setUser(user);
-        userRepository.save(user);
+        userService.createNewUser(user);
         deckRepository.save(deck);
         user.addDeck(deck2);
         deck.setUser(user);
