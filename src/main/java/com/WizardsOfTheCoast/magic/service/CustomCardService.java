@@ -13,8 +13,8 @@ public class CustomCardService {
 
     private final CustomCardRepository customCardRepository;
 
-    public void saveCard(CustomCardEntity card){
-        customCardRepository.save(card);
+    public CustomCardEntity saveCard(CustomCardEntity card){
+        return customCardRepository.save(card);
     }
 
     public CustomCardEntity findCardByName(String name){
