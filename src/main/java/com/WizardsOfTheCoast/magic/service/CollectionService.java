@@ -3,6 +3,7 @@ package com.WizardsOfTheCoast.magic.service;
 import com.WizardsOfTheCoast.magic.JPA.CollectionRepository;
 import com.WizardsOfTheCoast.magic.entity.CollectionEntity;
 import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
+import com.WizardsOfTheCoast.magic.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class CollectionService {
     private CollectionRepository collectionRepository;
+    private UserService userService;
 
     @Autowired
     public CollectionService(CollectionRepository collectionRepository) {
@@ -31,8 +33,13 @@ public class CollectionService {
         collectionRepository.save(collection);
     }
 
-    public CollectionEntity getCollection(Long collectionId){
+    public CollectionEntity getCollectionById(Long collectionId){
         return collectionRepository.findById(collectionId).get();
+    }
+
+    public CollectionEntity getCollectionByName(String name){
+        User user = userService.getUser(name);
+        return collectionRepository.findById(user.getId()).get();
     }
 
 
