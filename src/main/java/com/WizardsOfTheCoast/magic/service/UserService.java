@@ -119,4 +119,60 @@ public class UserService implements UserDetailsService {
         log.info("{} user fetched!",users.size());
         return users;
     }
+
+//    public void createNewUser(User user){
+//        User savedUser = userRepository.save(user);
+//        createNewWalletForUser(savedUser);
+//    }
+//
+//    private User createNewWalletForUser(User user){
+//        MagicWallet newWallet = new MagicWallet();
+//        user.setCurrency(newWallet);
+//        userRepository.save(user);
+//        return userRepository.save(user);
+//    }
+
+    public void addCardToUserDeck(Long userId, Long deckId, CustomCardEntity card) {
+        User user = userRepository.findById(userId).get();
+        DeckEntity deck = deckRepository.findById(deckId).get();
+        deck.addCard(card);
+    }
+
+    public User findUserById(Long id){
+        return userRepository.findById(id).get();
+    }
+
+    public List<CustomCardEntity> getAllUserCards(Long id){
+        User user = userRepository.findById(id).get();
+        return user.getCards();
+    }
+
+    public List<DeckEntity> getAllUserDecks(Long id){
+        User user = userRepository.findById(id).get();
+        return user.getDecks();
+    }
+
+    public DeckEntity findDeckById(User user, Long id){
+        return user.findDeckById(id);
+    }
+
+    public DeckEntity checkIfCardInAnyDeck(Long id, CustomCardEntity cardToDelete){
+        User user = userRepository.findById(id).get();
+        List<DeckEntity> decks = user.getDecks();
+        DeckEntity destinationDeck = null;
+        for (DeckEntity deck : decks) {
+            for(CustomCardEntity card: deck.getCards()){
+                if (card == cardToDelete) {
+                    destinationDeck = deck;
+                    break;
+                }
+            }
+        }
+        assert destinationDeck != null;
+        return destinationDeck;
+    }
+
+    public void saveUserForDeck(User user){
+        userRepository.save(user);
+    }
 }
