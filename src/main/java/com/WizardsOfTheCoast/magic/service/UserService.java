@@ -72,11 +72,12 @@ public class UserService implements UserDetailsService {
         return userList.size() > 0;
     }
 
-    public void createNewUser(User user){
+    public User createNewUser(User user){
         log.info("Creating User: {}", user.getUsername());
         User savedUser = saveUser(user);
-//        User savedUserWithWallet = createNewWalletForUser(savedUser);
-//        createNewCollectionForUser(savedUserWithWallet);
+        addRoleToUser(savedUser.getUsername(),"ROLE_USER");
+        userRepository.save(savedUser);
+        return savedUser;
     }
 
     public User getUser(String username){
@@ -99,7 +100,7 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
-        userRepository.save(user);;
+        userRepository.save(user);
     }
 
     public List<User> getAllUser(){
