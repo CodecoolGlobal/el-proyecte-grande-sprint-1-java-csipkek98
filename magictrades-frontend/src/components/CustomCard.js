@@ -31,7 +31,7 @@ const CustomCard = () => {
     }
     const postData = (e) => {
         e.preventDefault();
-        axios.post(URI, {
+        axios.post("/api/custom", {
             name: inputName,
             price: inputPrice, pic: inputPic,
             sessionId: sessionAttributes
