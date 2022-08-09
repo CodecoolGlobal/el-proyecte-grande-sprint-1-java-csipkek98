@@ -23,14 +23,27 @@ import java.util.List;
 @Transactional
 @Slf4j
 public class UserService implements UserDetailsService {
+
+
+    private UserRepository userRepository;
+    private MagicWalletRepository magicWalletRepository;
+    private CustomCardRepository customCardRepository;
+    private DeckRepository deckRepository;
+    private PasswordEncoder passwordEncoder;
+    private RoleRepository roleRepository;
+
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    MagicWalletRepository magicWalletRepository;
-    @Autowired
-    CollectionRepository collectionRepository;
+    public UserService(UserRepository userRepository,
+                       MagicWalletRepository magicWalletRepository,
+                       CustomCardRepository customCardRepository,
+                       DeckRepository deckRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.magicWalletRepository = magicWalletRepository;
+        this.customCardRepository = customCardRepository;
+        this.deckRepository = deckRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
+    }
 
     private final PasswordEncoder passwordEncoder;
 
