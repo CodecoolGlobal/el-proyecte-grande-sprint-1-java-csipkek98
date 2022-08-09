@@ -6,13 +6,15 @@ h1{
   color:white;
 }
 img{
-  width: 70%;
   height: auto;
   border-radius: 25px;
-  text-align: center;
   border-width: 20px;
   border-style: groove;
   Border-color: gray;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 /*NAVBAR*/
@@ -135,6 +137,13 @@ td{
   justify-content: center;
   margin-left: 150px;
 }
+.card-customImageUrl{
+  height: 50%;
+  width: auto;
+  display: grid;
+  justify-content: center;
+  margin-left: 150px;
+}
 * {
   box-sizing: border-box;
 }
@@ -176,6 +185,11 @@ div>h1, .cardPrice{
 .productsContainer>div{
   margin-bottom: 50px;
 }
+.deleteCardButton, .customCardSearchBar{
+  display: grid;
+  justify-content: center;
+}
+
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
