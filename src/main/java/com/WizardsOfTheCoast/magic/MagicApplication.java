@@ -43,10 +43,11 @@ public class MagicApplication {
 			userservice.saveRole(new Role(null, "ROLE_ADMIN"));
 			userservice.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-			userservice.saveUser(new User(null,"Christian Lace","chris","asd@asd.com","asd125",null,new ArrayList<>(), null, null));
+			userservice.createNewUser(new User(null,"Christian Lace","chris",
+					"asd@asd.com","asd125",null,
+					new ArrayList<>(), null, null));
 
 			userservice.addRoleToUser("chris", "ROLE_SUPER_ADMIN");
-			userservice.addRoleToUser("chris", "ROLE_USER");
 		};
 	}
 
