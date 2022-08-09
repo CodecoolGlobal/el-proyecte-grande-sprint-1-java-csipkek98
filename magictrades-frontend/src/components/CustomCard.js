@@ -50,11 +50,13 @@ const CustomCard = () => {
             alert("You need to register and login to add a custom card ! ")
         }
     }
-    const removeUser = async (id) =>  {
+    const removeCustomCard = async (id) =>  {
         try {
+
             const url = `http://localhost:8080/custom/user/${sessionAttributes}/card_id/${id}`;
-            const res = await axios.delete(url)
-            await fetchCards()
+            console.log(id);
+            await axios.delete(url);
+            await fetchCards();
         } catch (error) {
             alert(error)
         }
@@ -101,7 +103,7 @@ const CustomCard = () => {
                                         </div>
                                         <br/>
                                         <div className={"deleteCardButton"}>
-                                            <button className="searchButton" onClick={() => removeUser(cardObj.id)}> Delete this custom card </button>
+                                            <button className="searchButton" onClick={() => removeCustomCard(cardObj.id)}> Delete this custom card </button>
                                         </div>
 
                                     </div>
