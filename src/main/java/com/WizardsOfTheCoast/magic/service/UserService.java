@@ -1,11 +1,7 @@
 package com.WizardsOfTheCoast.magic.service;
 
-import com.WizardsOfTheCoast.magic.JPA.CollectionRepository;
-import com.WizardsOfTheCoast.magic.JPA.MagicWalletRepository;
-import com.WizardsOfTheCoast.magic.JPA.RoleRepository;
-import com.WizardsOfTheCoast.magic.JPA.UserRepository;
+import com.WizardsOfTheCoast.magic.JPA.*;
 import com.WizardsOfTheCoast.magic.entity.*;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.WizardsOfTheCoast.magic.entity.CustomCardEntity;
+import com.WizardsOfTheCoast.magic.entity.DeckEntity;
+import com.WizardsOfTheCoast.magic.entity.User;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
