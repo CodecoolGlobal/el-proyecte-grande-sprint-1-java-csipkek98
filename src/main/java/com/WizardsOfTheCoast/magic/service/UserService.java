@@ -176,4 +176,13 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public CustomCardEntity findCustomCardByNameFromUser(String name, User user){
+        for (CustomCardEntity card : user.getCards()) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+    }
+
 }
