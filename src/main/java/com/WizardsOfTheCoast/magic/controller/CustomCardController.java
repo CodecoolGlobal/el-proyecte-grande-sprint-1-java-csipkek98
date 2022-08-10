@@ -43,7 +43,7 @@ public class CustomCardController {
     }
 
     @GetMapping(value = "/custom/{id}")
-    public List<CustomCardEntity> getClients(@PathVariable String id) {
+    public List<CustomCardEntity> getCustomCards(@PathVariable String id) {
         System.out.println(id);
         User user = userService.findUserById(Long.valueOf(id));
         return userService.getAllUserCards(Long.valueOf(id));
@@ -84,7 +84,8 @@ public class CustomCardController {
     @GetMapping(value = "/custom/search/{id}/{name}")
     public ResponseEntity<CustomCardEntity>  findCustomCardByName(@PathVariable String id, @PathVariable String name){
         User user = userService.findUserById(Long.valueOf(id));
-        return ResponseEntity.ok().body(user.findCustomCardByName(name));
+        CustomCardEntity cardToFind = userService.findCustomCardByNameFromUser(name, user);
+        return ResponseEntity.ok().body(cardToFind);
     }
 
 }
