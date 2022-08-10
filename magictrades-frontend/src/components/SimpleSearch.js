@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from "react";
 import axios from "axios";
-import SearchResult from "./SearchResult";
 import {useNavigate} from "react-router-dom";
+import Pagination from "./Pagination";
+import Card from "./Card";
 
 const SimpleSearch = () => {
     const [inputName, setName] = useState('');
     const [getCards, setGetCardData] = useState([]);
+
     const url = `/api/search/${inputName}`;
+
     let navigate = useNavigate();
     const routeChange = () =>{
         let path = "/search";
@@ -41,8 +44,23 @@ const SimpleSearch = () => {
 
             </div>
             <div>
-                <SearchResult data={getCards}/>
+                <div>
+                    {getCards.length > 0 ? (
+                        <>
+                            <Pagination
+                                data={getCards}
+                                RenderComponent={Card}
+                                title="Cards"
+                                pageLimit={5}
+                                dataLimit={10}
+                            />
+                        </>
+                    ) : (
+                        <h1>No card to show ! </h1>
+                    )}
+                </div>
             </div>
+
         </div>
     );
 };
