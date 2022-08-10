@@ -23,7 +23,7 @@ public class RandomCardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/randomcard")
+    @GetMapping(value = "/api/randomcard")
     public CardModel getRandomCard(){
         CardModel cardData = cardService.getCard(APIEndpoints.RANDOM);
         while(cardData == null){

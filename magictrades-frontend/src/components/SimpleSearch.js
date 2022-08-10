@@ -9,10 +9,10 @@ const SimpleSearch = () => {
     const [inputName, setName] = useState('');
     const [getCards, setGetCardData] = useState([]);
 
-    const url = `http://localhost:8080/search/${inputName}`;
+    const url = `/api/search/${inputName}`;
+
     let navigate = useNavigate();
     const routeChange = () =>{
-    
         let path = "/search";
 
         navigate(path);

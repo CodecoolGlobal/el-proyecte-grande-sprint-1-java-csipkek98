@@ -66,7 +66,7 @@ public class DeckController {
             DeckEntity newDeck = new DeckEntity();
             user.addDeck(newDeck);
             newDeck.setUser(user);
-            userService.saveUser(user);
+            userService.saveUserForDeck(user);
             deckService.saveDeck(newDeck);
             return newDeck;
         }

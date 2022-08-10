@@ -20,7 +20,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @GetMapping(value = "/search/{name}")
+    @GetMapping(value = "/api/search/{name}")
     public List<CardModel> getAllCardsTest(@PathVariable (required = false) String name){
         List<String> parameters = new ArrayList<>();
         parameters.add("name="+name);

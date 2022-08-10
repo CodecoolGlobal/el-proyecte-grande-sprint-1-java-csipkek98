@@ -7,17 +7,30 @@ const SearchCustomCard = () => {
     const sessionAttributes = sessionStorage.getItem('id')
     const [searchName, setSearchName] = useState("");
     const [cardData, setCardData] = useState([]);
+
+    console.log(parseJwt(localStorage.getItem("jwt")).sub)
+
+    function parseJwt (token) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    }
+
     const searchByName = () => {
 
-        axios.get(`http://localhost:8080/custom/search/${sessionAttributes}/${searchName}`, {params:
+        axios.get(`/custom/${sessionAttributes}/${searchName}`, {params:
                 {sessionId: sessionAttributes,
                     name : searchName}})
             .then(r => setCardData(r.data) );
 
-            console.log(cardData);
+        console.log(cardData);
 
     }
-        useEffect(() => { searchByName()},[]);
+    useEffect(() => { searchByName()},[]);
     const hideSearchCard = () =>{
         setCardData([]);
     }
@@ -32,9 +45,9 @@ const SearchCustomCard = () => {
             <button className="searchButton" onClick={searchByName}>Search ! </button>
             <button className="searchButton" onClick={hideSearchCard}>Clear ! </button>
             <div>
-                    <div >
-                        <CustomCardSearchResult {...cardData}/>
-                    </div>
+                <div >
+                    <CustomCardSearchResult {...cardData}/>
+                </div>
 
             </div>
         </div>
