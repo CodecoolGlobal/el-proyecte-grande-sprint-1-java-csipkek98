@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const url = `http://localhost:8080/randomcard`;
+const url = `/api/randomcard`;
 const fetchCards = (abortController) => {
     return axios.get(url, {signal: abortController.signal})
 }
@@ -25,10 +25,6 @@ const RandomCards = () => {
         }
     },[]);
     return (
-
-        // Create new component inside the map
-        // Mapping can be replaced, card component
-
         <div
             // className="productsContainer"
              id={"card-details"}>
